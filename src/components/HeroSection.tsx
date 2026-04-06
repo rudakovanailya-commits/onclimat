@@ -22,7 +22,7 @@ const HeroSection = () => {
             Чтобы дома было комфортно в&nbsp;любую погоду
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground/80 max-w-xl leading-relaxed">
-            Более 20 лет помогаем создавать комфорт у&nbsp;вас дома — подбираем и&nbsp;устанавливаем оборудование в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
+            Подберём и&nbsp;установим климатическое оборудование под&nbsp;ваши запросы
           </p>
           <p className="text-sm md:text-base text-primary-foreground/60 italic">
             А какой кондиционер подойдёт именно вам?
