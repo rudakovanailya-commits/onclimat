@@ -21,27 +21,34 @@ const HeroSection = () => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight">
             Чтобы дома было комфортно в&nbsp;любую погоду
           </h1>
-          <p className="text-lg md:text-xl text-primary-foreground/80 max-w-xl leading-relaxed">
-            Подберём и&nbsp;установим климатическое оборудование под&nbsp;ваши запросы
-          </p>
-          <p className="text-sm md:text-base text-primary-foreground/60 italic">
-            А какой кондиционер подойдёт именно вам?
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Button
-              size="lg"
-              onClick={() => scrollTo("#selection")}
-              className="bg-primary-foreground text-primary font-semibold hover:bg-primary-foreground/90 shadow-button text-base px-8"
-            >
-              Подбор за 2 минуты
-            </Button>
-            <Button
-              size="lg"
-              onClick={() => scrollTo("#catalog")}
-              className="bg-primary-foreground/20 backdrop-blur-sm border-2 border-primary-foreground text-primary-foreground font-semibold hover:bg-primary-foreground/30 text-base px-8"
-            >
-              Перейти в каталог
-            </Button>
+          <div className="space-y-3">
+            <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium">
+              Более 20 лет помогаем создавать комфорт у&nbsp;вас дома в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
+            </p>
+            <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium">
+              Подберём и&nbsp;установим климатическое оборудование под&nbsp;ваши запросы
+            </p>
+          </div>
+          <div className="space-y-3 pt-2">
+            <p className="text-sm md:text-base text-primary-foreground/70 italic">
+              А какой кондиционер подойдёт именно вам?
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button
+                size="lg"
+                onClick={() => scrollTo("#selection")}
+                className="bg-primary-foreground text-primary font-semibold hover:bg-primary-foreground/90 shadow-button text-base px-8"
+              >
+                Подбор за 2 минуты
+              </Button>
+              <Button
+                size="lg"
+                onClick={() => scrollTo("#catalog")}
+                className="bg-primary-foreground/30 backdrop-blur-sm border-2 border-primary-foreground text-primary-foreground font-semibold hover:bg-primary-foreground/40 text-base px-8"
+              >
+                Перейти в каталог
+              </Button>
+            </div>
           </div>
         </div>
       </div>
