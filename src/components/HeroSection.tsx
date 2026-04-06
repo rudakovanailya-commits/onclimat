@@ -37,9 +37,8 @@ const HeroSection = () => {
             </Button>
             <Button
               size="lg"
-              variant="outline"
               onClick={() => scrollTo("#catalog")}
-              className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 text-base px-8"
+              className="bg-primary-foreground/20 backdrop-blur-sm border-2 border-primary-foreground text-primary-foreground font-semibold hover:bg-primary-foreground/30 text-base px-8"
             >
               Перейти в каталог
             </Button>
