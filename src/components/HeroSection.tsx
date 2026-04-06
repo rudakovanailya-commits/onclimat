@@ -18,8 +18,13 @@ const HeroSection = () => {
       <div className="absolute inset-0 gradient-hero" />
       <div className="container relative z-10 py-20 md:py-32">
         <div className="max-w-2xl space-y-6">
-          <div className="inline-block px-4 py-1.5 rounded-full bg-primary-foreground/15 backdrop-blur-sm border border-primary-foreground/20">
-            <span className="text-sm font-medium text-primary-foreground">Более 20 лет опыта</span>
+          <div className="space-y-1">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-primary-foreground/15 backdrop-blur-sm border border-primary-foreground/20">
+              <span className="text-sm font-medium text-primary-foreground">Более 20 лет помогаем создавать комфорт у&nbsp;вас дома</span>
+            </div>
+            <div className="inline-block px-4 py-1.5 rounded-full bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/15">
+              <span className="text-xs font-medium text-primary-foreground/70">Подбираем и устанавливаем оборудование в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области</span>
+            </div>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight">
             Чтобы дома было комфортно в&nbsp;любую погоду
