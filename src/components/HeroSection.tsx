@@ -24,7 +24,10 @@ const HeroSection = () => {
           <p className="text-lg md:text-xl text-primary-foreground/80 max-w-xl leading-relaxed">
             Более 20 лет помогаем создавать комфорт у&nbsp;вас дома — подбираем и&nbsp;устанавливаем оборудование в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
           </p>
-          <div className="flex flex-wrap gap-4 pt-2">
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <p className="text-sm md:text-base text-primary-foreground/70 italic">
+              А какой кондиционер подойдёт именно вам?
+            </p>
             <Button
               size="lg"
               onClick={() => scrollTo("#selection")}
