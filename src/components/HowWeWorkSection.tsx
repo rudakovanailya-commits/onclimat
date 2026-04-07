@@ -13,7 +13,7 @@ const HowWeWorkSection = () => (
         Как мы работаем
       </h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
-        {steps.map((step, i) => (
+        {steps.map((step) => (
           <div key={step.num} className="relative text-center">
             <div className="text-5xl font-extrabold text-primary/30 mb-2">{step.num}</div>
             <h3 className="font-bold text-foreground mb-1">{step.title}</h3>
