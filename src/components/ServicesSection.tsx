@@ -14,14 +14,14 @@ const ServicesSection = () => (
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">Услуги</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((s) => (
-          <div key={s.title} className="bg-card rounded-xl p-6 shadow-card border border-border text-center space-y-4 flex flex-col">
-            <div className="w-14 h-14 mx-auto rounded-xl gradient-primary flex items-center justify-center">
+          <div key={s.title} className="bg-card rounded-xl p-6 shadow-card border border-border text-center flex flex-col h-full">
+            <div className="w-14 h-14 mx-auto rounded-xl gradient-primary flex items-center justify-center mb-4">
               <s.icon className="w-7 h-7 text-primary-foreground" />
             </div>
-            <h3 className="font-semibold text-lg text-foreground">{s.title}</h3>
-            <p className="text-sm text-muted-foreground">{s.text}</p>
-            {s.extra && <p className="text-xs text-muted-foreground">{s.extra}</p>}
-            <div className="mt-auto pt-2">
+            <h3 className="font-semibold text-lg text-foreground mb-2">{s.title}</h3>
+            <p className="text-sm text-muted-foreground mb-2">{s.text}</p>
+            {s.extra && <p className="text-xs text-muted-foreground mb-2">{s.extra}</p>}
+            <div className="mt-auto pt-4">
               <Button className="gradient-primary text-primary-foreground shadow-button w-full">Оставить заявку</Button>
             </div>
           </div>
