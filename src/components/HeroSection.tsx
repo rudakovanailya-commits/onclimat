@@ -25,7 +25,7 @@ const HeroSection = () => {
             <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-2xl leading-relaxed font-medium">
               Более 20 лет помогаем создавать комфорт<br /> у&nbsp;вас дома в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
             </p>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium italic">
               Подберём и&nbsp;установим климатическое оборудование под&nbsp;ваши запросы
             </p>
           </div>
