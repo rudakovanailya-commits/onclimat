@@ -22,28 +22,30 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 gradient-hero" />
       <div className="container relative z-10 py-20 md:py-32">
-        <div className="max-w-2xl space-y-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight">
-            Чтобы дома было комфортно в&nbsp;любую погоду
-          </h1>
-          <div className="space-y-3">
-            <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-2xl leading-relaxed font-medium">
-              Более 20 лет помогаем создавать комфорт<br /> у&nbsp;вас дома в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
-            </p>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium italic">
-              <TextType
-                text="Подберём и установим климатическое оборудование под ваши запросы"
-                typingSpeed={50}
-                showCursor
-                cursorCharacter="_"
-                loop={false}
-                initialDelay={800}
-                startOnVisible
-                onComplete={() => setTimeout(() => setTypingDone(true), 5000)}
-              />
-            </p>
+        <div className="space-y-6">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight">
+              Чтобы дома было комфортно в&nbsp;любую погоду
+            </h1>
+            <div className="space-y-3 mt-6">
+              <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-2xl leading-relaxed font-medium">
+                Более 20 лет помогаем создавать комфорт<br /> у&nbsp;вас дома в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
+              </p>
+              <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium italic">
+                <TextType
+                  text="Подберём и установим климатическое оборудование под ваши запросы"
+                  typingSpeed={50}
+                  showCursor
+                  cursorCharacter="_"
+                  loop={false}
+                  initialDelay={800}
+                  startOnVisible
+                  onComplete={() => setTimeout(() => setTypingDone(true), 5000)}
+                />
+              </p>
+            </div>
           </div>
-          <div className="space-y-3 pt-2">
+          <div className="space-y-3 pt-2 max-w-4xl">
             <p className="text-base md:text-lg text-primary-foreground/80 font-bold">
               <DecryptedText
                 text="А какой кондиционер подойдёт именно вам?"
