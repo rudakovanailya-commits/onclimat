@@ -1,9 +1,8 @@
 const steps = [
-  { num: "01", title: "Оставляете заявку", text: "Или проходите подбор онлайн" },
-  { num: "02", title: "Уточняем задачи", text: "Связываемся и выясняем детали" },
-  { num: "03", title: "Подбираем оборудование", text: "Оптимальные варианты под бюджет" },
-  { num: "04", title: "Согласовываем", text: "Финальный выбор и стоимость" },
-  { num: "05", title: "Доставка и установка", text: "Монтаж в удобное время" },
+  { num: "01", title: "Оставляете заявку", text: "Связываемся с вами, обсуждаем задачу и пожелания" },
+  { num: "02", title: "Подбираем варианты", text: "Предлагаем подходящие решения под ваш случай" },
+  { num: "03", title: "Согласовываем", text: "Фиксируем оборудование, стоимость и удобное время" },
+  { num: "04", title: "Доставка и установка", text: "Привозим и устанавливаем — аккуратно и в срок" },
 ];
 
 const HowWeWorkSection = () => (
@@ -12,7 +11,7 @@ const HowWeWorkSection = () => (
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-14">
         Как мы работаем
       </h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {steps.map((step) => (
           <div key={step.num} className="relative text-center">
             <div className="text-5xl font-extrabold text-primary/30 mb-2">{step.num}</div>
