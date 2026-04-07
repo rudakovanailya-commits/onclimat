@@ -46,14 +46,14 @@ const HeroSection = () => {
               <Button
                 size="lg"
                 onClick={() => scrollTo("#selection")}
-                className="bg-primary-foreground text-primary font-semibold hover:bg-primary-foreground/90 shadow-button text-base px-8"
+                className="bg-primary-foreground text-primary font-bold hover:bg-primary-foreground/90 shadow-button text-lg md:text-xl px-10 md:px-14 py-5 md:py-6 h-auto rounded-xl"
               >
                 Подбор за 2 минуты
               </Button>
               <Button
                 size="lg"
                 onClick={() => scrollTo("#catalog")}
-                className="bg-primary-foreground/30 backdrop-blur-sm border-2 border-primary-foreground text-primary-foreground font-semibold hover:bg-primary-foreground/40 text-base px-8"
+                className="bg-primary-foreground/20 backdrop-blur-sm border-[3px] border-primary-foreground text-primary-foreground font-bold hover:bg-primary-foreground/35 text-lg md:text-xl px-10 md:px-14 py-5 md:py-6 h-auto rounded-xl"
               >
                 Перейти в каталог
               </Button>
