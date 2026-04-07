@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import TextType from "@/components/TextType";
+import DecryptedText from "@/components/DecryptedText";
 import heroImage from "@/assets/hero-comfort.jpg";
 
 const HeroSection = () => {
