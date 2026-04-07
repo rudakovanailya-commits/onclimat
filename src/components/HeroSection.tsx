@@ -55,18 +55,18 @@ const HeroSection = () => {
                 startAnimation={typingDone}
               />
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-6">
               <Button
                 size="lg"
                 onClick={() => scrollTo("#selection")}
-                className="bg-primary-foreground text-primary font-bold hover:bg-primary-foreground/90 shadow-button text-lg md:text-xl px-10 md:px-14 py-5 md:py-6 h-auto rounded-xl"
+                className="bg-primary-foreground text-primary font-bold hover:bg-primary-foreground/90 shadow-button text-lg md:text-2xl px-14 md:px-20 py-6 md:py-7 h-auto rounded-xl min-w-[260px] md:min-w-[320px]"
               >
                 Подбор за 2 минуты
               </Button>
               <Button
                 size="lg"
                 onClick={() => scrollTo("#catalog")}
-                className="bg-primary-foreground/20 backdrop-blur-sm border-[3px] border-primary-foreground text-primary-foreground font-bold hover:bg-primary-foreground/35 text-lg md:text-xl px-10 md:px-14 py-5 md:py-6 h-auto rounded-xl"
+                className="bg-primary-foreground/20 backdrop-blur-sm border-[3px] border-primary-foreground text-primary-foreground font-bold hover:bg-primary-foreground/35 text-lg md:text-2xl px-14 md:px-20 py-6 md:py-7 h-auto rounded-xl min-w-[260px] md:min-w-[320px]"
               >
                 Перейти в каталог
               </Button>
