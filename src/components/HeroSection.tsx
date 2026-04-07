@@ -3,7 +3,10 @@ import TextType from "@/components/TextType";
 import DecryptedText from "@/components/DecryptedText";
 import heroImage from "@/assets/hero-comfort.jpg";
 
+import { useState } from "react";
+
 const HeroSection = () => {
+  const [typingDone, setTypingDone] = useState(false);
   const scrollTo = (id: string) => {
     document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -36,6 +39,7 @@ const HeroSection = () => {
                 loop={false}
                 initialDelay={800}
                 startOnVisible
+                onComplete={() => setTypingDone(true)}
               />
             </p>
           </div>
@@ -43,12 +47,12 @@ const HeroSection = () => {
             <p className="text-base md:text-lg text-primary-foreground/80 font-bold">
               <DecryptedText
                 text="А какой кондиционер подойдёт именно вам?"
-                animateOn="view"
                 speed={40}
                 maxIterations={15}
                 sequential
                 revealDirection="start"
                 parentClassName="font-bold"
+                startAnimation={typingDone}
               />
             </p>
             <div className="flex flex-wrap gap-4">

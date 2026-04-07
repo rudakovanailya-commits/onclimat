@@ -31,6 +31,7 @@ interface DecryptedTextProps {
   encryptedClassName?: string;
   animateOn?: 'hover' | 'view' | 'click' | 'inViewHover';
   clickMode?: 'once' | 'toggle';
+  startAnimation?: boolean;
   [key: string]: unknown;
 }
 
@@ -47,6 +48,7 @@ export default function DecryptedText({
   encryptedClassName = '',
   animateOn = 'hover',
   clickMode = 'once',
+  startAnimation,
   ...props
 }: DecryptedTextProps) {
   const [displayText, setDisplayText] = useState(text);
@@ -293,6 +295,14 @@ export default function DecryptedText({
     setIsDecrypted(true);
     setDirection('forward');
   }, [text]);
+
+  // Manual trigger via startAnimation prop
+  useEffect(() => {
+    if (startAnimation === true && !hasAnimated) {
+      triggerDecrypt();
+      setHasAnimated(true);
+    }
+  }, [startAnimation, hasAnimated, triggerDecrypt]);
 
   useEffect(() => {
     if (animateOn !== 'view' && animateOn !== 'inViewHover') return;
