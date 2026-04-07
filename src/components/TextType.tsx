@@ -12,6 +12,7 @@ interface TextTypeProps {
   cursorCharacter?: string;
   cursorBlinkDuration?: number;
   startOnVisible?: boolean;
+  onComplete?: () => void;
 }
 
 const TextType = ({
@@ -25,6 +26,7 @@ const TextType = ({
   showCursor = true,
   cursorCharacter = '|',
   startOnVisible = false,
+  onComplete,
 }: TextTypeProps) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
@@ -67,9 +69,17 @@ const TextType = ({
             setDisplayedText(prev => prev + currentText[currentCharIndex]);
             setCurrentCharIndex(prev => prev + 1);
           }, typingSpeed);
-        } else if (textArray.length > 1) {
-          if (!loop && currentTextIndex === textArray.length - 1) return;
-          timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
+        } else {
+          if (textArray.length > 1) {
+            if (!loop && currentTextIndex === textArray.length - 1) {
+              onComplete?.();
+              return;
+            }
+            timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
+          } else if (!loop) {
+            onComplete?.();
+            return;
+          }
         }
       }
     };
