@@ -23,7 +23,7 @@ const HeroSection = () => {
           </h1>
           <div className="space-y-3">
             <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium">
-              Более 20 лет помогаем создавать комфорт<br className="hidden md:inline" /> у&nbsp;вас дома в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
+              Более 20 лет помогаем создавать комфорт у&nbsp;вас дома<br className="hidden md:inline" /> в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
             </p>
             <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium">
               Подберём и&nbsp;установим климатическое оборудование под&nbsp;ваши запросы
