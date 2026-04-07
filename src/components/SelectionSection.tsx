@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 
 const SelectionSection = () => (
-  <section id="selection" className="py-20 bg-background">
+  <section id="selection" className="py-14 bg-background">
     <div className="container max-w-3xl">
-      <div className="bg-card rounded-2xl p-8 md:p-12 shadow-card border border-border text-center space-y-6">
+      <div className="gradient-cta rounded-2xl p-8 md:p-12 shadow-card border border-border text-center space-y-6">
         <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           Сложно выбрать кондиционер?<br />Поможем разобраться
         </h2>
