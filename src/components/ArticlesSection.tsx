@@ -28,11 +28,6 @@ const ArticlesSection = () => (
         ))}
       </div>
 
-      <div className="mt-10 text-center bg-card rounded-xl p-8 shadow-card border border-border">
-        <h3 className="text-xl font-semibold text-foreground mb-2">Не хотите разбираться сами?</h3>
-        <p className="text-muted-foreground mb-4">Поможем выбрать и предложим подходящее решение</p>
-        <Button className="gradient-primary text-primary-foreground shadow-button">Оставить заявку</Button>
-      </div>
     </div>
   </section>
 );
