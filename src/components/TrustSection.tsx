@@ -3,7 +3,7 @@ import { Settings, Truck, Handshake } from "lucide-react";
 const cards = [
   {
     icon: Settings,
-    title: "Подбор под ваш дом",
+    title: "Подбор под ваш объект",
     text: "Учитываем площадь, планировку и ваши пожелания — подбираем не \"по каталогу\", а под реальную задачу",
   },
   {
