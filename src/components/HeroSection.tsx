@@ -40,7 +40,7 @@ const HeroSection = () => {
                   loop={false}
                   initialDelay={800}
                   startOnVisible
-                  onComplete={() => setTimeout(() => setTypingDone(true), 5000)}
+                  onComplete={() => setTimeout(() => setTypingDone(true), 3000)}
                 />
               </p>
             </div>
