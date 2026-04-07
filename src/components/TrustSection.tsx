@@ -1,25 +1,20 @@
-import { Settings, Truck, Handshake, Award } from "lucide-react";
+import { Settings, Truck, Handshake } from "lucide-react";
 
 const cards = [
   {
     icon: Settings,
-    title: "Подбор под задачи",
-    text: "Подбираем оборудование под помещение, а не просто продаём",
+    title: "Подбор под ваш дом",
+    text: "Учитываем площадь, планировку и ваши пожелания — подбираем не \"по каталогу\", а под реальную задачу",
   },
   {
     icon: Truck,
     title: "Установка под ключ",
-    text: "Берём на себя подбор, доставку и монтаж",
+    text: "Берём на себя всё: подбор, доставку и монтаж — вам не нужно разбираться в деталях",
   },
   {
     icon: Handshake,
-    title: "Работа с поставщиками",
-    text: "Подбираем оптимальные варианты по цене и срокам",
-  },
-  {
-    icon: Award,
-    title: "20+ лет опыта",
-    text: "Работаем с климатическим оборудованием с 2005 года",
+    title: "Проверенные поставщики",
+    text: "Работаем с надёжными брендами и подбираем оптимальные варианты по цене и срокам",
   },
 ];
 
@@ -29,7 +24,7 @@ const TrustSection = () => (
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
         Почему нам доверяют
       </h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-3 gap-6">
         {cards.map((card) => (
           <div
             key={card.title}
