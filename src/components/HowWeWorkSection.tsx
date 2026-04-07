@@ -19,7 +19,6 @@ const HowWeWorkSection = () => (
             <h3 className="font-bold text-foreground mb-1">{step.title}</h3>
             <p className="text-sm text-foreground/70">{step.text}</p>
           </div>
-          </div>
         ))}
       </div>
     </div>
