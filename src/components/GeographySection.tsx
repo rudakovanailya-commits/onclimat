@@ -1,7 +1,7 @@
 import { MapPin } from "lucide-react";
 
 const GeographySection = () => (
-  <section className="py-16 bg-muted/50">
+  <section className="py-12 bg-muted/50">
     <div className="container text-center space-y-4">
       <div className="w-14 h-14 mx-auto rounded-full bg-accent flex items-center justify-center">
         <MapPin className="w-7 h-7 text-accent-foreground" />
