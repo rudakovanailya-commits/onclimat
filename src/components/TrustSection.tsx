@@ -1,4 +1,4 @@
-import { Settings, Truck, Handshake, Award } from "lucide-react";
+import { Settings, Truck, Handshake } from "lucide-react";
 
 const cards = [
   {
@@ -24,7 +24,7 @@ const TrustSection = () => (
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
         Почему нам доверяют
       </h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-3 gap-6">
         {cards.map((card) => (
           <div
             key={card.title}
