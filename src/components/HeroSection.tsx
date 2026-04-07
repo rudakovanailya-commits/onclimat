@@ -24,8 +24,10 @@ const HeroSection = () => {
       <div className="container relative z-10 py-20 md:py-32">
         <div className="space-y-6">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight">
-              Чтобы дома было комфортно в&nbsp;любую погоду
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight whitespace-nowrap">
+              Чтобы дома было комфортно
+              <br />
+              в&nbsp;любую погоду
             </h1>
             <div className="space-y-3 mt-6">
               <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-2xl leading-relaxed font-medium">
