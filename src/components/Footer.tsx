@@ -29,9 +29,6 @@ const Footer = () => (
           <a href="#" className="block text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors">
             Политика конфиденциальности
           </a>
-          <a href="#" className="block text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-            Оферта
-          </a>
         </div>
       </div>
       <div className="border-t border-primary-foreground/10 mt-10 pt-6 text-center text-xs text-primary-foreground/40">
