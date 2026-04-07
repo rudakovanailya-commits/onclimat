@@ -1,30 +1,16 @@
 
 
-## Plan: Chain DecryptedText animation after TextType finishes
+## Problem
 
-### Problem
-Both animations start independently. The "А какой кондиционер подойдёт именно вам?" decryption animation should wait until the typing animation completes.
+The parent `div` has `max-w-2xl` (672px) which constrains both the text and the buttons. The buttons with `flex-1` split this narrow space equally, making each button only ~310px wide. The user wants the "Подбор за 2 минуты" button to be as wide as the "А какой кондиционер подойдёт именно вам?" text.
 
-### Approach
-1. **Add `onComplete` callback to TextType** — fire when typing finishes (when `loop=false` and all characters are typed).
-2. **Use state in HeroSection** — track when TextType is done, then conditionally trigger DecryptedText.
-3. **Add manual trigger to DecryptedText** — new prop (e.g. `startAnimation`) that triggers the decrypt when set to `true`, instead of relying on `animateOn="view"`.
+## Solution
 
-### Changes
+Move the question text and buttons block outside of the `max-w-2xl` wrapper so they can stretch wider. Remove `max-w-2xl` from the parent div OR restructure so only the heading and subtitle are constrained.
 
-**src/components/TextType.tsx**
-- Add `onComplete?: () => void` to props interface.
-- Call `onComplete()` when typing finishes (non-loop mode, all chars typed).
+### File: `src/components/HeroSection.tsx`
 
-**src/components/DecryptedText.tsx**
-- Add optional `startAnimation?: boolean` prop.
-- When `startAnimation` transitions from `false` to `true`, trigger `triggerDecrypt()`.
-
-**src/components/HeroSection.tsx**
-- Add `useState` for `typingDone`.
-- Pass `onComplete={() => setTypingDone(true)}` to TextType.
-- Pass `startAnimation={typingDone}` to DecryptedText (remove `animateOn="view"`).
-
-### Timing
-The typing text is ~63 chars at 50ms each + 800ms delay ≈ 4s total. The decryption will start immediately after, creating a seamless chain.
+- Change the parent `max-w-2xl` div to only wrap the heading and subtitle
+- Move the `space-y-3 pt-2` block (question text + buttons) outside of `max-w-2xl`, giving it its own wider max-width (e.g. `max-w-3xl` or `max-w-4xl`) so the buttons naturally stretch wider
+- Keep both buttons as `flex-1` so they fill the row equally at the new wider width
 
