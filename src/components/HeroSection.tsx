@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import TextType from "@/components/TextType";
 import heroImage from "@/assets/hero-comfort.jpg";
 
 const HeroSection = () => {
@@ -26,7 +27,15 @@ const HeroSection = () => {
               Более 20 лет помогаем создавать комфорт<br /> у&nbsp;вас дома в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
             </p>
             <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium italic">
-              Подберём и&nbsp;установим климатическое оборудование под&nbsp;ваши запросы
+              <TextType
+                text="Подберём и установим климатическое оборудование под ваши запросы"
+                typingSpeed={50}
+                showCursor
+                cursorCharacter="_"
+                loop={false}
+                initialDelay={800}
+                startOnVisible
+              />
             </p>
           </div>
           <div className="space-y-3 pt-2">
