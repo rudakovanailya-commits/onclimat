@@ -46,7 +46,7 @@ const HeroSection = () => {
             </div>
           </div>
           <div className="space-y-3 pt-8 max-w-4xl">
-            <p className="text-base md:text-lg text-primary-foreground/80 font-bold">
+            <p className="text-base md:text-lg text-accent font-bold">
               <DecryptedText
                 text="А какой кондиционер подойдёт именно вам?"
                 speed={40}
