@@ -49,8 +49,8 @@ const HeroSection = () => {
             <p className="text-base md:text-lg text-[hsl(45,100%,60%)] font-bold">
               <DecryptedText
                 text="А какой кондиционер подойдёт именно вам?"
-                speed={40}
-                maxIterations={15}
+                speed={80}
+                maxIterations={25}
                 sequential
                 revealDirection="start"
                 parentClassName="font-bold"
