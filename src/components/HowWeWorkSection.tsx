@@ -15,12 +15,10 @@ const HowWeWorkSection = () => (
       <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {steps.map((step, i) => (
           <div key={step.num} className="relative text-center">
-            <div className="text-5xl font-extrabold text-primary/15 mb-2">{step.num}</div>
-            <h3 className="font-semibold text-foreground mb-1">{step.title}</h3>
-            <p className="text-sm text-muted-foreground">{step.text}</p>
-            {i < steps.length - 1 && (
-              <div className="hidden lg:block absolute top-8 -right-3 w-6 text-primary/30 text-2xl">→</div>
-            )}
+            <div className="text-5xl font-extrabold text-primary/30 mb-2">{step.num}</div>
+            <h3 className="font-bold text-foreground mb-1">{step.title}</h3>
+            <p className="text-sm text-foreground/70">{step.text}</p>
+          </div>
           </div>
         ))}
       </div>
