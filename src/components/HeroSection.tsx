@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import TextType from "@/components/TextType";
+import DecryptedText from "@/components/DecryptedText";
 import heroImage from "@/assets/hero-comfort.jpg";
 
 const HeroSection = () => {
@@ -39,8 +40,16 @@ const HeroSection = () => {
             </p>
           </div>
           <div className="space-y-3 pt-2">
-            <p className="text-sm md:text-base text-primary-foreground/70 italic">
-              А какой кондиционер подойдёт именно вам?
+            <p className="text-base md:text-lg text-primary-foreground/80 font-bold">
+              <DecryptedText
+                text="А какой кондиционер подойдёт именно вам?"
+                animateOn="view"
+                speed={40}
+                maxIterations={15}
+                sequential
+                revealDirection="start"
+                parentClassName="font-bold"
+              />
             </p>
             <div className="flex flex-wrap gap-4">
               <Button
