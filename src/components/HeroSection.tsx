@@ -37,7 +37,6 @@ const HeroSection = () => {
                 startOnVisible
               />
             </p>
-            </p>
           </div>
           <div className="space-y-3 pt-2">
             <p className="text-sm md:text-base text-primary-foreground/70 italic">
