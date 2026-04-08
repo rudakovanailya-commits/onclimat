@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Wrench, RefreshCw, Search, PenTool } from "lucide-react";
+import { useChat } from "@/components/ChatContext";
 
 const services = [
   { icon: Wrench, title: "Установка кондиционеров", text: "Монтаж под ключ с гарантией и запуском" },
