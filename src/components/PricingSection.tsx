@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Check, AlertCircle, MessageCircle, Calculator } from "lucide-react";
+import { Check, AlertCircle, MessageCircle, Calculator, ArrowRight } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { useChat } from "@/components/ChatContext";
 
@@ -150,6 +151,16 @@ const PricingSection = () => {
               Оставить заявку
             </Button>
           </div>
+        </div>
+
+        {/* Full pricing link */}
+        <div className="text-center mb-10">
+          <Link to="/montazh-ceny">
+            <Button variant="ghost" className="text-muted-foreground hover:text-foreground gap-2 text-sm">
+              Смотреть полный прайс на монтаж и дополнительные работы
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </div>
 
         {/* Info blocks */}
