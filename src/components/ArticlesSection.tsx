@@ -12,8 +12,8 @@ const ArticlesSection = () => (
       <div className="grid md:grid-cols-3 gap-6">
         {articles.map((a) => (
           <div key={a.slug} className="bg-card rounded-xl p-6 shadow-card border border-border flex flex-col h-full">
-            <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mb-4">
-              <BookOpen className="w-5 h-5 text-violet" />
+            <div className="w-12 h-12 rounded-lg icon-box flex items-center justify-center mb-4">
+              <BookOpen className="w-6 h-6 text-primary-foreground" />
             </div>
             <h3 className="font-semibold text-foreground mb-2">{a.title}</h3>
             <p className="text-sm text-muted-foreground flex-1">{a.excerpt}</p>

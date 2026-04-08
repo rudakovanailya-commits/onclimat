@@ -84,6 +84,10 @@
   .gradient-cta {
     background: var(--gradient-cta);
   }
+  .icon-box {
+    background: var(--gradient-primary);
+    box-shadow: 0 4px 16px rgba(124,58,237,0.2);
+  }
   .shadow-card {
     box-shadow: var(--shadow-card);
   }

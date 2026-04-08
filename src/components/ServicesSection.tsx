@@ -15,8 +15,8 @@ const ServicesSection = () => (
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((s) => (
           <div key={s.title} className="bg-card rounded-xl p-6 shadow-card border border-border text-center flex flex-col h-full">
-            <div className="w-14 h-14 mx-auto rounded-xl gradient-primary flex items-center justify-center mb-4">
-              <s.icon className="w-7 h-7 text-primary-foreground" />
+            <div className="w-16 h-16 mx-auto rounded-xl icon-box flex items-center justify-center mb-4">
+              <s.icon className="w-8 h-8 text-primary-foreground" />
             </div>
             <h3 className="font-semibold text-lg text-foreground mb-2">{s.title}</h3>
             <p className="text-sm text-muted-foreground mb-2">{s.text}</p>

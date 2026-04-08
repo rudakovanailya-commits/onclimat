@@ -14,7 +14,9 @@ const HowWeWorkSection = () => (
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {steps.map((step) => (
           <div key={step.num} className="relative text-center">
-            <div className="text-5xl font-extrabold text-violet/30 mb-2">{step.num}</div>
+            <div className="w-14 h-14 mx-auto rounded-xl icon-box flex items-center justify-center mb-3">
+              <span className="text-2xl font-extrabold text-primary-foreground">{step.num}</span>
+            </div>
             <h3 className="font-bold text-foreground mb-1">{step.title}</h3>
             <p className="text-sm text-foreground/70">{step.text}</p>
           </div>
