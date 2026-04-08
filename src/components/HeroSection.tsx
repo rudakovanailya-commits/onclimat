@@ -24,16 +24,16 @@ const HeroSection = () => {
       <div className="container relative z-10 py-20 md:py-32">
         <div className="space-y-6">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight whitespace-nowrap">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight">
               Чтобы дома было комфортно
               <br />
               в&nbsp;любую погоду
             </h1>
             <div className="space-y-3 mt-6">
-              <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-2xl leading-relaxed font-medium">
+              <p className="text-lg md:text-2xl text-primary-foreground/90 max-w-2xl leading-relaxed font-medium">
                 Более 20 лет помогаем создавать комфорт<br /> у&nbsp;вас дома в&nbsp;Санкт-Петербурге и&nbsp;Ленинградской области
               </p>
-              <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium italic">
+              <p className="text-lg md:text-2xl text-primary-foreground/90 max-w-xl leading-relaxed font-medium italic">
                 <TextType
                   text="Подберём и установим климатическое оборудование под ваши запросы"
                   typingSpeed={50}
@@ -59,18 +59,18 @@ const HeroSection = () => {
                 startAnimation={typingDone}
               />
             </p>
-            <div className="flex gap-6 w-full">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 w-full">
               <Button
                 size="lg"
                 onClick={() => scrollTo("#selection")}
-                className="flex-1 bg-primary-foreground text-primary font-bold hover:bg-primary-foreground/90 shadow-button text-lg md:text-2xl py-6 md:py-7 h-auto rounded-xl"
+                className="w-full sm:flex-1 bg-primary-foreground text-primary font-bold hover:bg-primary-foreground/90 shadow-button text-base md:text-2xl py-6 md:py-7 h-auto rounded-xl"
               >
                 Подбор за 2 минуты
               </Button>
               <Button
                 size="lg"
                 onClick={() => scrollTo("#catalog")}
-                className="flex-1 bg-primary-foreground/20 backdrop-blur-sm border-[3px] border-primary-foreground text-primary-foreground font-bold hover:bg-primary-foreground/35 text-lg md:text-2xl py-6 md:py-7 h-auto rounded-xl"
+                className="w-full sm:flex-1 bg-primary-foreground/20 backdrop-blur-sm border-[3px] border-primary-foreground text-primary-foreground font-bold hover:bg-primary-foreground/35 text-base md:text-2xl py-6 md:py-7 h-auto rounded-xl"
               >
                 Перейти в каталог
               </Button>
