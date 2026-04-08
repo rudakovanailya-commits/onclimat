@@ -3,7 +3,7 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   LayoutDashboard, FileText, Wrench, ShoppingBag, Image, Percent,
-  Phone, Inbox, Settings, LogOut, Menu, X
+  Phone, Inbox, Settings, LogOut, Menu, X, MessageCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -16,6 +16,7 @@ const navItems = [
   { to: "/admin/promos", label: "Акции", icon: Percent },
   { to: "/admin/contacts", label: "Контакты", icon: Phone },
   { to: "/admin/submissions", label: "Заявки", icon: Inbox },
+  { to: "/admin/chats", label: "Чаты", icon: MessageCircle },
   { to: "/admin/sections", label: "Секции", icon: Settings },
 ];
 
