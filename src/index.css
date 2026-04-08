@@ -23,7 +23,7 @@
     --secondary-foreground: 222 47% 11%;
 
     --muted: 210 25% 92%;
-    --muted-foreground: 215 15% 46%;
+    --muted-foreground: 215 18% 34%;
 
     --accent: 263 84% 95%;
     --accent-foreground: 263 84% 58%;
@@ -64,13 +64,21 @@
   }
 
   body {
-    @apply text-foreground font-sans antialiased;
+    @apply text-foreground font-sans antialiased leading-relaxed;
     background: linear-gradient(180deg, #F1F5F9 0%, #EDE9FE 100%);
     min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+    @apply font-bold tracking-tight leading-tight;
+  }
+
+  h2 {
+    @apply mb-4;
+  }
+
+  p {
+    @apply leading-relaxed;
   }
 }
 
