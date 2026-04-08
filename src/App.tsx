@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ChatProvider } from "@/components/ChatContext";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ArticlePage from "./pages/ArticlePage.tsx";
@@ -29,27 +30,29 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/articles/:slug" element={<ArticlePage />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/montazh-ceny" element={<MontazhCeny />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminDashboard />}>
-            <Route index element={<Overview />} />
-            <Route path="services" element={<AdminServices />} />
-            <Route path="catalog" element={<AdminCatalog />} />
-            <Route path="portfolio" element={<AdminPortfolio />} />
-            <Route path="articles" element={<AdminArticles />} />
-            <Route path="promos" element={<AdminPromos />} />
-            <Route path="contacts" element={<AdminContacts />} />
-            <Route path="submissions" element={<AdminSubmissions />} />
-            <Route path="sections" element={<AdminSections />} />
-            <Route path="chats" element={<AdminChats />} />
-          </Route>
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ChatProvider>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/articles/:slug" element={<ArticlePage />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/montazh-ceny" element={<MontazhCeny />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminDashboard />}>
+              <Route index element={<Overview />} />
+              <Route path="services" element={<AdminServices />} />
+              <Route path="catalog" element={<AdminCatalog />} />
+              <Route path="portfolio" element={<AdminPortfolio />} />
+              <Route path="articles" element={<AdminArticles />} />
+              <Route path="promos" element={<AdminPromos />} />
+              <Route path="contacts" element={<AdminContacts />} />
+              <Route path="submissions" element={<AdminSubmissions />} />
+              <Route path="sections" element={<AdminSections />} />
+              <Route path="chats" element={<AdminChats />} />
+            </Route>
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ChatProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
