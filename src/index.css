@@ -65,7 +65,7 @@
 
   body {
     @apply text-foreground font-sans antialiased leading-relaxed;
-    background: linear-gradient(180deg, #F1F5F9 0%, #EDE9FE 100%);
+    background: linear-gradient(180deg, #7C3AED 0%, #DDD6FE 100%);
     min-height: 100vh;
   }
 
