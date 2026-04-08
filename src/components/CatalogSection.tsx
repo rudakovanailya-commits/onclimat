@@ -83,7 +83,7 @@ const CatalogSection = () => {
               onClick={() => handleCategoryChange(cat.id)}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all border ${
                 active === cat.id
-                  ? "gradient-primary text-primary-foreground border-transparent"
+                  ? "btn-gradient text-primary-foreground border-transparent"
                   : "bg-card text-foreground border-border hover:border-primary/40"
               }`}
             >
@@ -129,7 +129,7 @@ const CatalogSection = () => {
                   <Button variant="outline" size="sm" className="flex-1 text-xs">
                     Подробнее
                   </Button>
-                  <Button size="sm" className="flex-1 text-xs gradient-primary text-primary-foreground">
+                  <Button size="sm" className="flex-1 text-xs btn-gradient text-primary-foreground">
                     Подобрать вариант
                   </Button>
                 </div>

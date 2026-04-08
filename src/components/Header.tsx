@@ -52,7 +52,7 @@ const Header = () => {
             <Phone className="w-4 h-4" />
             8 (800) 123-45-67
           </a>
-          <Button onClick={() => scrollTo("#selection")} size="sm" className="gradient-primary shadow-button text-primary-foreground">
+          <Button onClick={() => scrollTo("#selection")} size="sm" className="btn-gradient text-primary-foreground">
             Подбор за 2 минуты
           </Button>
         </div>
@@ -83,7 +83,7 @@ const Header = () => {
           <a href="tel:+78001234567" className="flex items-center gap-2 py-2 text-sm font-semibold">
             <Phone className="w-4 h-4" /> 8 (800) 123-45-67
           </a>
-          <Button onClick={() => scrollTo("#selection")} className="w-full mt-2 gradient-primary shadow-button text-primary-foreground">
+          <Button onClick={() => scrollTo("#selection")} className="w-full mt-2 btn-gradient text-primary-foreground">
             Подбор за 2 минуты
           </Button>
         </div>
