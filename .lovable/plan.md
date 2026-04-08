@@ -1,47 +1,79 @@
 
-Цель
-- Убрать вечную "Загрузка..." в админ-разделах и сделать причину сбоя видимой.
 
-Что я нашёл
-- На скриншоте показывается не загрузка страницы статей, а глобальный loader из `src/pages/AdminDashboard.tsx`.
-- Проверка роли admin проходит успешно: запросы к `user_roles` возвращают `200` и `admin`.
-- Значит проблема вероятнее всего в `src/hooks/useAuth.tsx`: там одновременно работают `getSession()` и `onAuthStateChange()`, оба делают запрос в `user_roles` и оба управляют `loading`.
-- Почти все админ-страницы грузят данные без нормальных `loading/error` состояний, поэтому пользователь видит зависание вместо понятной ошибки.
+## Plan: AI Chat Assistant for Climate Equipment
 
-План исправления
-1. Переписать `useAuth` на один надёжный поток
-- Вынести проверку admin-роли в отдельную функцию.
-- Убрать дублирование между `getSession()` и `onAuthStateChange()`.
-- Не держать тяжёлую async-логику прямо внутри `onAuthStateChange`; вызывать отдельный `resolveAuth`.
-- Во всех ветках завершать `loading` через `try/catch/finally`.
-- Добавить защиту от обновления state после unmount.
+### What
+Add a floating chat widget powered by Lovable AI that opens when users click "Подбор за 2 минуты" or "Задать вопрос" buttons. The AI assistant helps select climate equipment, answers questions, and collects leads. All conversations are saved to the database and visible in the admin panel.
 
-2. Сделать `AdminDashboard` устойчивым
-- Показывать глобальный loader только во время первичной проверки сессии.
-- Если сессия невалидна или роль не подтверждена, сразу уводить на `/admin/login`, а не оставлять бесконечную загрузку.
+### Database Changes
 
-3. Добавить локальные состояния загрузки и ошибок в разделы
-- Для `AdminArticles`, `AdminServices`, `AdminPortfolio`, `AdminCatalog`, `AdminContacts`, `AdminSubmissions`, `AdminSections`:
-  - `loading` при первом запросе
-  - `error` с понятным текстом
-  - `try/catch` в `load/save/remove`
-- Тогда каждый раздел либо покажет данные, либо объяснит, что именно не загрузилось.
+**New table: `chat_conversations`**
+- `id` uuid PK
+- `name` text (nullable)
+- `phone` text (nullable)
+- `status` text default `'active'` (active / closed / transferred)
+- `created_at`, `updated_at` timestamps
 
-4. Отдельно улучшить `AdminCatalog`
-- Разделить состояния загрузки категорий и товаров.
-- Явно показывать: "Загружаем категории", "Нет категорий", "Нет товаров".
-- Исключить ситуацию, когда пустой `activeCat` выглядит как зависание.
+**New table: `chat_messages`**
+- `id` uuid PK
+- `conversation_id` uuid FK → chat_conversations
+- `role` text (user / assistant / system)
+- `content` text
+- `created_at` timestamp
 
-5. Проверка после внедрения
-- Войти в `/admin/login`.
-- Последовательно открыть: Обзор, Услуги, Каталог, Работы, Статьи, Акции, Контакты, Заявки, Секции.
-- Проверить, что ни один раздел не остаётся на вечной "Загрузка...".
+RLS: public INSERT for both tables (anonymous users chat without auth), admin SELECT/UPDATE/DELETE.
 
-Технические детали
-- Основные файлы: `src/hooks/useAuth.tsx`, `src/pages/AdminDashboard.tsx`, `src/pages/admin/AdminArticles.tsx`, `AdminServices.tsx`, `AdminCatalog.tsx`, `AdminPortfolio.tsx`, `AdminContacts.tsx`, `AdminSubmissions.tsx`, `AdminSections.tsx`.
-- Изменения в базе не нужны.
-- Консольное предупреждение про ref у `AdminDashboard` выглядит вторичным и не похоже на основную причину зависания; сначала нужно стабилизировать auth/loading flow.
+### Edge Function: `chat`
 
-Ожидаемый результат
-- Админка перестанет зависать на общем экране "Загрузка...".
-- Если какой-то запрос реально падает, ошибка будет видна в конкретном разделе, а не маскироваться бесконечным loader.
+- Receives `{ messages, conversation_id }`.
+- System prompt instructs AI to be a climate equipment consultant for OnКлимат (СПб). Includes catalog data, services list, pricing guidance. AI asks clarifying questions about room type, area, budget, tasks. Suggests 2-3 options with explanations. When user is ready, asks for name + phone to create a submission. If user says "связаться с менеджером", sets conversation status to "transferred".
+- Uses Lovable AI gateway with `google/gemini-3-flash-preview`.
+- Streams response via SSE.
+
+### Frontend Components
+
+1. **`ChatWidget.tsx`** — floating button (bottom-right corner) + slide-up chat panel.
+   - Message list with markdown rendering (`react-markdown`).
+   - Input field + send button.
+   - Streaming token-by-token display.
+   - When AI detects user wants to leave contacts, parses name/phone and inserts into `submissions` table too.
+
+2. **Button wiring:**
+   - Header "Подбор за 2 минуты" → opens chat with pre-filled message "Помогите подобрать оборудование".
+   - HeroSection CTAs → open chat.
+   - CtaSection "Получить подбор" → opens chat.
+   - Add "Задать вопрос" button to Header.
+
+3. **`ChatContext.tsx`** — React context to manage chat open/close state and pre-filled messages across components.
+
+### Admin Panel
+
+**New page: `AdminChats.tsx`** at `/admin/chats`
+- List of conversations with name, phone, status, date.
+- Click to expand and view full message history.
+- Filter by status (active / transferred / closed).
+- Add nav item to AdminDashboard sidebar.
+
+### Files to Create/Edit
+
+| Action | File |
+|--------|------|
+| Create | `supabase/functions/chat/index.ts` |
+| Create | `src/components/ChatWidget.tsx` |
+| Create | `src/components/ChatContext.tsx` |
+| Create | `src/pages/admin/AdminChats.tsx` |
+| Edit | `src/components/Header.tsx` — add "Задать вопрос" button, wire both buttons to open chat |
+| Edit | `src/components/HeroSection.tsx` — wire CTA to open chat |
+| Edit | `src/components/CtaSection.tsx` — wire button to open chat |
+| Edit | `src/pages/Index.tsx` — wrap with ChatContext, add ChatWidget |
+| Edit | `src/App.tsx` — add admin/chats route |
+| Edit | `src/pages/AdminDashboard.tsx` — add "Чаты" nav item |
+| Migration | Create `chat_conversations` and `chat_messages` tables with RLS |
+
+### Technical Details
+
+- System prompt will include the 4 services from DB and general climate equipment knowledge (BTU calculations, noise levels, inverter vs non-inverter, popular brands).
+- Chat stores conversation_id in local state; creates new conversation on first message.
+- Submission creation happens via Supabase client when AI signals readiness (tool calling or keyword detection in edge function).
+- `react-markdown` package needed for rendering AI responses.
+
