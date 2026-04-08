@@ -93,4 +93,17 @@
   .shadow-button {
     box-shadow: var(--shadow-button);
   }
+  .shadow-button:hover {
+    box-shadow: var(--shadow-button-hover);
+  }
+  .btn-gradient {
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-button);
+    transform: scale(1);
+    transition: all 0.2s ease;
+  }
+  .btn-gradient:hover {
+    box-shadow: var(--shadow-button-hover);
+    transform: scale(1.03);
+  }
 }
