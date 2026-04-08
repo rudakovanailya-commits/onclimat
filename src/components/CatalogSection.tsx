@@ -81,10 +81,10 @@ const CatalogSection = () => {
             <button
               key={cat.id}
               onClick={() => handleCategoryChange(cat.id)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all border ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border cursor-pointer ${
                 active === cat.id
-                  ? "btn-gradient text-primary-foreground border-transparent"
-                  : "bg-card text-foreground border-border hover:border-primary/40"
+                  ? "btn-gradient text-primary-foreground border-transparent shadow-button"
+                  : "bg-white text-foreground border-[hsl(214,32%,91%)] hover:bg-accent hover:text-accent-foreground"
               }`}
             >
               <cat.icon className="w-4 h-4" />
