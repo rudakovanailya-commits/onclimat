@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { articles } from "@/data/articles";
 import { useChat } from "@/components/ChatContext";
+import ChatWidget from "@/components/ChatWidget";
 import NotFound from "./NotFound";
 
 const ArticlePage = () => {
@@ -29,9 +30,12 @@ const ArticlePage = () => {
         <div className="mt-12 text-center bg-card rounded-xl p-8 shadow-card border border-border">
           <h3 className="text-xl font-semibold text-foreground mb-2">Не уверены, как лучше сделать?</h3>
           <p className="text-muted-foreground mb-4">Поможем и подскажем под вашу ситуацию</p>
-          <Button className="gradient-primary text-primary-foreground shadow-button" onClick={() => openChat()}>Оставить заявку</Button>
+          <Button className="gradient-primary text-primary-foreground shadow-button" onClick={() => openChat()}>
+            Оставить заявку
+          </Button>
         </div>
       </div>
+      <ChatWidget />
     </div>
   );
 };
