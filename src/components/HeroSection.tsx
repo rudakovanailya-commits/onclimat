@@ -12,7 +12,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-[85vh] flex items-center overflow-hidden">
+    <section id="hero" className="relative min-h-[70vh] flex items-center overflow-hidden">
       <img
         src={heroImage}
         alt="Комфортная комната с кондиционером"
@@ -21,7 +21,7 @@ const HeroSection = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
       <div className="absolute inset-0 gradient-hero" />
-      <div className="container relative z-10 py-20 md:py-32">
+      <div className="container relative z-10 py-14 md:py-24">
         <div className="space-y-6">
           <div className="max-w-2xl">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground leading-tight">
@@ -47,7 +47,7 @@ const HeroSection = () => {
               </p>
             </div>
           </div>
-          <div className="space-y-3 pt-8 max-w-4xl">
+          <div className="space-y-3 pt-6 max-w-4xl">
             <p className="text-base md:text-lg text-[hsl(45,100%,60%)] font-bold">
               <DecryptedText
                 text="А какой кондиционер подойдёт именно вам?"

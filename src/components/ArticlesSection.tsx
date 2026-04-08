@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { articles } from "@/data/articles";
 
 const ArticlesSection = () => (
-  <section id="articles" className="py-20">
+  <section id="articles" className="py-14">
     <div className="container">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">
         Что важно знать перед установкой
       </h2>
       <div className="grid md:grid-cols-3 gap-6">

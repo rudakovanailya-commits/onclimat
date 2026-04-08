@@ -71,12 +71,12 @@ const CatalogSection = () => {
   };
 
   return (
-    <section id="catalog" className="py-20">
+    <section id="catalog" className="py-14">
       <div className="container">
         <p className="text-center text-muted-foreground mb-2">Или выберите оборудование самостоятельно</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Каталог</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">Каталог</h2>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
           {categories.map((cat) => (
             <button
               key={cat.id}

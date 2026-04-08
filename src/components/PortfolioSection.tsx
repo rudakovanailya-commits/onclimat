@@ -28,9 +28,9 @@ const works = [
 ];
 
 const PortfolioSection = () => (
-  <section className="py-20">
+  <section className="py-14">
     <div className="container">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">
         Примеры наших работ
       </h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -54,7 +54,7 @@ const PortfolioSection = () => (
           </div>
         ))}
       </div>
-      <div className="text-center mt-10">
+      <div className="text-center mt-8">
         <Button variant="outline" className="border-primary text-primary hover:bg-primary/5 px-8">
           Смотреть ещё работы
         </Button>

@@ -1,7 +1,7 @@
 import { Phone, MapPin, Mail } from "lucide-react";
 
 const Footer = () => (
-  <footer id="contacts" className="bg-foreground text-primary-foreground py-20">
+  <footer id="contacts" className="bg-foreground text-primary-foreground py-14">
     <div className="container">
       <div className="grid md:grid-cols-3 gap-10">
         <div className="space-y-4">
@@ -31,7 +31,7 @@ const Footer = () => (
           </a>
         </div>
       </div>
-      <div className="border-t border-primary-foreground/10 mt-10 pt-6 text-center text-xs text-primary-foreground/40">
+      <div className="border-t border-primary-foreground/10 mt-8 pt-5 text-center text-xs text-primary-foreground/40">
         © {new Date().getFullYear()} On Климат. Все права защищены.
       </div>
     </div>

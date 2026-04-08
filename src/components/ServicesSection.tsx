@@ -9,9 +9,9 @@ const services = [
 ];
 
 const ServicesSection = () => (
-  <section id="services" className="py-20">
+  <section id="services" className="py-14">
     <div className="container">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">Услуги</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">Услуги</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((s) => (
           <div key={s.title} className="bg-card rounded-xl p-6 shadow-card border border-border text-center flex flex-col h-full">
