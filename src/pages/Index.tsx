@@ -13,25 +13,30 @@ import GeographySection from "@/components/GeographySection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import SilkCSSBackground from "@/components/SilkCSSBackground";
+import { ChatProvider } from "@/components/ChatContext";
+import ChatWidget from "@/components/ChatWidget";
 
 const Index = () => (
-  <div className="min-h-screen">
-    <SilkCSSBackground />
-    <Header />
-    <HeroSection />
-    <TrustSection />
-    <HowWeWorkSection />
-    <SelectionSection />
-    <PromosSection />
-    <CatalogSection />
-    <ServicesSection />
-    <PortfolioSection />
-    <ReviewsSection />
-    <ArticlesSection />
-    <GeographySection />
-    <CtaSection />
-    <Footer />
-  </div>
+  <ChatProvider>
+    <div className="min-h-screen">
+      <SilkCSSBackground />
+      <Header />
+      <HeroSection />
+      <TrustSection />
+      <HowWeWorkSection />
+      <SelectionSection />
+      <PromosSection />
+      <CatalogSection />
+      <ServicesSection />
+      <PortfolioSection />
+      <ReviewsSection />
+      <ArticlesSection />
+      <GeographySection />
+      <CtaSection />
+      <Footer />
+      <ChatWidget />
+    </div>
+  </ChatProvider>
 );
 
 export default Index;

@@ -17,6 +17,7 @@ import AdminPromos from "./pages/admin/AdminPromos.tsx";
 import AdminContacts from "./pages/admin/AdminContacts.tsx";
 import AdminSubmissions from "./pages/admin/AdminSubmissions.tsx";
 import AdminSections from "./pages/admin/AdminSections.tsx";
+import AdminChats from "./pages/admin/AdminChats.tsx";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="contacts" element={<AdminContacts />} />
             <Route path="submissions" element={<AdminSubmissions />} />
             <Route path="sections" element={<AdminSections />} />
+            <Route path="chats" element={<AdminChats />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
