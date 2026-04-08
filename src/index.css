@@ -62,7 +62,9 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply text-foreground font-sans antialiased;
+    background: linear-gradient(180deg, #F1F5F9 0%, #EDE9FE 100%);
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
