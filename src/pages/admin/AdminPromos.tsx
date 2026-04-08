@@ -14,13 +14,23 @@ const empty = { title: "", description: "", icon_name: "Percent", sort_order: 0,
 
 const AdminPromos = () => {
   const [items, setItems] = useState<Promo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState(empty);
   const [isNew, setIsNew] = useState(false);
 
   const load = async () => {
-    const { data } = await supabase.from("promos").select("*").order("sort_order");
-    setItems(data ?? []);
+    try {
+      setError("");
+      const { data, error: err } = await supabase.from("promos").select("*").order("sort_order");
+      if (err) throw err;
+      setItems(data ?? []);
+    } catch (e: any) {
+      setError(e.message || "Ошибка загрузки");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);
@@ -31,12 +41,34 @@ const AdminPromos = () => {
 
   const save = async () => {
     if (!form.title.trim()) { toast.error("Введите название"); return; }
-    if (isNew) { await supabase.from("promos").insert(form); toast.success("Акция добавлена"); }
-    else { await supabase.from("promos").update(form).eq("id", editing!); toast.success("Акция обновлена"); }
-    cancel(); load();
+    try {
+      if (isNew) {
+        const { error: err } = await supabase.from("promos").insert(form);
+        if (err) throw err;
+        toast.success("Акция добавлена");
+      } else {
+        const { error: err } = await supabase.from("promos").update(form).eq("id", editing!);
+        if (err) throw err;
+        toast.success("Акция обновлена");
+      }
+      cancel(); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка сохранения");
+    }
   };
 
-  const remove = async (id: string) => { await supabase.from("promos").delete().eq("id", id); toast.success("Удалено"); load(); };
+  const remove = async (id: string) => {
+    try {
+      const { error: err } = await supabase.from("promos").delete().eq("id", id);
+      if (err) throw err;
+      toast.success("Удалено"); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка удаления");
+    }
+  };
+
+  if (loading) return <p className="text-muted-foreground">Загрузка акций...</p>;
+  if (error) return <p className="text-destructive">Ошибка: {error}</p>;
 
   const renderForm = () => (
     <div className="space-y-3">
@@ -81,6 +113,7 @@ const AdminPromos = () => {
             )}
           </div>
         ))}
+        {items.length === 0 && <p className="text-muted-foreground text-sm">Акций пока нет</p>}
       </div>
     </div>
   );

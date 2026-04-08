@@ -9,22 +9,36 @@ type SectionSetting = Tables<"section_settings">;
 const AdminSections = () => {
   const [items, setItems] = useState<SectionSetting[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const load = async () => {
-    const { data } = await supabase.from("section_settings").select("*").order("created_at");
-    setItems(data ?? []);
-    setLoading(false);
+    try {
+      setError("");
+      const { data, error: err } = await supabase.from("section_settings").select("*").order("created_at");
+      if (err) throw err;
+      setItems(data ?? []);
+    } catch (e: any) {
+      setError(e.message || "Ошибка загрузки");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);
 
   const toggle = async (id: string, visible: boolean) => {
-    await supabase.from("section_settings").update({ visible }).eq("id", id);
-    toast.success(visible ? "Секция показана" : "Секция скрыта");
-    load();
+    try {
+      const { error: err } = await supabase.from("section_settings").update({ visible }).eq("id", id);
+      if (err) throw err;
+      toast.success(visible ? "Секция показана" : "Секция скрыта");
+      load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка");
+    }
   };
 
-  if (loading) return <p className="text-muted-foreground">Загрузка...</p>;
+  if (loading) return <p className="text-muted-foreground">Загрузка секций...</p>;
+  if (error) return <p className="text-destructive">Ошибка: {error}</p>;
 
   return (
     <div className="space-y-4">
@@ -39,6 +53,7 @@ const AdminSections = () => {
             <Switch checked={s.visible} onCheckedChange={(v) => toggle(s.id, v)} />
           </div>
         ))}
+        {items.length === 0 && <p className="text-muted-foreground text-sm p-4">Секций нет</p>}
       </div>
     </div>
   );

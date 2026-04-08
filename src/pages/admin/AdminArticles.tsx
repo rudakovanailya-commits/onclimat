@@ -14,13 +14,23 @@ const emptyArticle = { slug: "", title: "", excerpt: "", content: "", visible: t
 
 const AdminArticles = () => {
   const [items, setItems] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState(emptyArticle);
   const [isNew, setIsNew] = useState(false);
 
   const load = async () => {
-    const { data } = await supabase.from("articles").select("*").order("created_at", { ascending: false });
-    setItems(data ?? []);
+    try {
+      setError("");
+      const { data, error: err } = await supabase.from("articles").select("*").order("created_at", { ascending: false });
+      if (err) throw err;
+      setItems(data ?? []);
+    } catch (e: any) {
+      setError(e.message || "Ошибка загрузки");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);
@@ -36,20 +46,34 @@ const AdminArticles = () => {
 
   const save = async () => {
     if (!form.title.trim() || !form.slug.trim()) { toast.error("Заполните название и slug"); return; }
-    if (isNew) {
-      await supabase.from("articles").insert(form);
-      toast.success("Статья добавлена");
-    } else {
-      await supabase.from("articles").update(form).eq("id", editing!);
-      toast.success("Статья обновлена");
+    try {
+      if (isNew) {
+        const { error: err } = await supabase.from("articles").insert(form);
+        if (err) throw err;
+        toast.success("Статья добавлена");
+      } else {
+        const { error: err } = await supabase.from("articles").update(form).eq("id", editing!);
+        if (err) throw err;
+        toast.success("Статья обновлена");
+      }
+      cancel(); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка сохранения");
     }
-    cancel(); load();
   };
 
   const remove = async (id: string) => {
-    await supabase.from("articles").delete().eq("id", id);
-    toast.success("Статья удалена"); load();
+    try {
+      const { error: err } = await supabase.from("articles").delete().eq("id", id);
+      if (err) throw err;
+      toast.success("Статья удалена"); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка удаления");
+    }
   };
+
+  if (loading) return <p className="text-muted-foreground">Загрузка статей...</p>;
+  if (error) return <p className="text-destructive">Ошибка: {error}</p>;
 
   return (
     <div className="space-y-4">
@@ -104,6 +128,7 @@ const AdminArticles = () => {
             )}
           </div>
         ))}
+        {items.length === 0 && <p className="text-muted-foreground text-sm">Статей пока нет</p>}
       </div>
     </div>
   );

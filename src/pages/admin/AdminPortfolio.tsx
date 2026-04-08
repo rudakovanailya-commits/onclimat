@@ -14,14 +14,24 @@ const empty = { title: "", description: "", image_url: "", sort_order: 0, visibl
 
 const AdminPortfolio = () => {
   const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState(empty);
   const [isNew, setIsNew] = useState(false);
   const [uploading, setUploading] = useState(false);
 
   const load = async () => {
-    const { data } = await supabase.from("portfolio_items").select("*").order("sort_order");
-    setItems(data ?? []);
+    try {
+      setError("");
+      const { data, error: err } = await supabase.from("portfolio_items").select("*").order("sort_order");
+      if (err) throw err;
+      setItems(data ?? []);
+    } catch (e: any) {
+      setError(e.message || "Ошибка загрузки");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);
@@ -44,13 +54,35 @@ const AdminPortfolio = () => {
 
   const save = async () => {
     if (!form.title.trim()) { toast.error("Введите название"); return; }
-    const payload = { title: form.title, description: form.description, image_url: form.image_url || null, sort_order: form.sort_order, visible: form.visible };
-    if (isNew) { await supabase.from("portfolio_items").insert(payload); toast.success("Работа добавлена"); }
-    else { await supabase.from("portfolio_items").update(payload).eq("id", editing!); toast.success("Работа обновлена"); }
-    cancel(); load();
+    try {
+      const payload = { title: form.title, description: form.description, image_url: form.image_url || null, sort_order: form.sort_order, visible: form.visible };
+      if (isNew) {
+        const { error: err } = await supabase.from("portfolio_items").insert(payload);
+        if (err) throw err;
+        toast.success("Работа добавлена");
+      } else {
+        const { error: err } = await supabase.from("portfolio_items").update(payload).eq("id", editing!);
+        if (err) throw err;
+        toast.success("Работа обновлена");
+      }
+      cancel(); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка сохранения");
+    }
   };
 
-  const remove = async (id: string) => { await supabase.from("portfolio_items").delete().eq("id", id); toast.success("Удалено"); load(); };
+  const remove = async (id: string) => {
+    try {
+      const { error: err } = await supabase.from("portfolio_items").delete().eq("id", id);
+      if (err) throw err;
+      toast.success("Удалено"); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка удаления");
+    }
+  };
+
+  if (loading) return <p className="text-muted-foreground">Загрузка работ...</p>;
+  if (error) return <p className="text-destructive">Ошибка: {error}</p>;
 
   const renderForm = () => (
     <div className="space-y-3">
@@ -108,6 +140,7 @@ const AdminPortfolio = () => {
             )}
           </div>
         ))}
+        {items.length === 0 && <p className="text-muted-foreground text-sm">Работ пока нет</p>}
       </div>
     </div>
   );

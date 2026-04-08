@@ -14,13 +14,23 @@ const emptyService = { title: "", description: "", icon_name: "Wrench", extra: "
 
 const AdminServices = () => {
   const [items, setItems] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState(emptyService);
   const [isNew, setIsNew] = useState(false);
 
   const load = async () => {
-    const { data } = await supabase.from("services").select("*").order("sort_order");
-    setItems(data ?? []);
+    try {
+      setError("");
+      const { data, error: err } = await supabase.from("services").select("*").order("sort_order");
+      if (err) throw err;
+      setItems(data ?? []);
+    } catch (e: any) {
+      setError(e.message || "Ошибка загрузки");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);
@@ -41,22 +51,34 @@ const AdminServices = () => {
 
   const save = async () => {
     if (!form.title.trim()) { toast.error("Введите название"); return; }
-    if (isNew) {
-      await supabase.from("services").insert({ title: form.title, description: form.description, icon_name: form.icon_name, extra: form.extra || null, sort_order: form.sort_order, visible: form.visible });
-      toast.success("Услуга добавлена");
-    } else {
-      await supabase.from("services").update({ title: form.title, description: form.description, icon_name: form.icon_name, extra: form.extra || null, sort_order: form.sort_order, visible: form.visible }).eq("id", editing!);
-      toast.success("Услуга обновлена");
+    try {
+      if (isNew) {
+        const { error: err } = await supabase.from("services").insert({ title: form.title, description: form.description, icon_name: form.icon_name, extra: form.extra || null, sort_order: form.sort_order, visible: form.visible });
+        if (err) throw err;
+        toast.success("Услуга добавлена");
+      } else {
+        const { error: err } = await supabase.from("services").update({ title: form.title, description: form.description, icon_name: form.icon_name, extra: form.extra || null, sort_order: form.sort_order, visible: form.visible }).eq("id", editing!);
+        if (err) throw err;
+        toast.success("Услуга обновлена");
+      }
+      cancel(); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка сохранения");
     }
-    cancel();
-    load();
   };
 
   const remove = async (id: string) => {
-    await supabase.from("services").delete().eq("id", id);
-    toast.success("Услуга удалена");
-    load();
+    try {
+      const { error: err } = await supabase.from("services").delete().eq("id", id);
+      if (err) throw err;
+      toast.success("Услуга удалена"); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка удаления");
+    }
   };
+
+  if (loading) return <p className="text-muted-foreground">Загрузка услуг...</p>;
+  if (error) return <p className="text-destructive">Ошибка: {error}</p>;
 
   return (
     <div className="space-y-4">
@@ -117,6 +139,7 @@ const AdminServices = () => {
             )}
           </div>
         ))}
+        {items.length === 0 && <p className="text-muted-foreground text-sm">Услуг пока нет</p>}
       </div>
     </div>
   );
