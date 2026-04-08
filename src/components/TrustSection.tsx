@@ -33,7 +33,6 @@ const TrustSection = () => (
             <div className="w-14 h-14 rounded-lg icon-box flex items-center justify-center mb-4">
               <card.icon className="w-7 h-7 text-primary-foreground" />
             </div>
-            </div>
             <h3 className="font-semibold text-lg text-foreground mb-2">{card.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{card.text}</p>
           </div>
