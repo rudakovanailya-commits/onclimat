@@ -30,10 +30,9 @@ const TrustSection = () => (
             key={card.title}
             className="bg-card rounded-xl p-6 shadow-card hover:shadow-card-hover transition-shadow duration-300 border border-border"
           >
-            <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
-              cards.indexOf(card) === 1 ? "bg-accent" : "gradient-primary"
-            }`}>
-              <card.icon className={`w-6 h-6 ${cards.indexOf(card) === 1 ? "text-accent-foreground" : "text-primary-foreground"}`} />
+            <div className="w-14 h-14 rounded-lg icon-box flex items-center justify-center mb-4">
+              <card.icon className="w-7 h-7 text-primary-foreground" />
+            </div>
             </div>
             <h3 className="font-semibold text-lg text-foreground mb-2">{card.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{card.text}</p>
