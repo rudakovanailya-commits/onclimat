@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Wrench, RefreshCw, Search, PenTool } from "lucide-react";
+import { useChat } from "@/components/ChatContext";
 
 const services = [
   { icon: Wrench, title: "Установка кондиционеров", text: "Монтаж под ключ с гарантией и запуском" },
@@ -8,7 +9,9 @@ const services = [
   { icon: PenTool, title: "Проектирование по вашему ТЗ", text: "Решения для квартир, домов и коммерческих помещений", extra: "Подбор и расчёт оборудования" },
 ];
 
-const ServicesSection = () => (
+const ServicesSection = () => {
+  const { openChat } = useChat();
+  return (
   <section id="services" className="py-14">
     <div className="container">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">Услуги</h2>
@@ -22,13 +25,14 @@ const ServicesSection = () => (
             <p className="text-sm text-muted-foreground mb-2">{s.text}</p>
             {s.extra && <p className="text-xs text-muted-foreground mb-2">{s.extra}</p>}
             <div className="mt-auto pt-4">
-              <Button className="btn-gradient text-primary-foreground w-full">Оставить заявку</Button>
+              <Button className="btn-gradient text-primary-foreground w-full" onClick={() => openChat(`Интересует ${s.title.toLowerCase()}`)}>Оставить заявку</Button>
             </div>
           </div>
         ))}
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default ServicesSection;
