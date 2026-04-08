@@ -2,14 +2,13 @@ import { Button } from "@/components/ui/button";
 import TextType from "@/components/TextType";
 import DecryptedText from "@/components/DecryptedText";
 import heroImage from "@/assets/hero-comfort.jpg";
+import { useChat } from "@/components/ChatContext";
 
 import { useState } from "react";
 
 const HeroSection = () => {
   const [typingDone, setTypingDone] = useState(false);
-  const scrollTo = (id: string) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  const { openChat } = useChat();
 
   return (
     <section id="hero" className="relative min-h-[70vh] flex items-center overflow-hidden">
@@ -62,14 +61,14 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 w-full">
               <Button
                 size="lg"
-                onClick={() => scrollTo("#selection")}
+                onClick={() => openChat("Помогите подобрать оборудование")}
                 className="w-full sm:flex-1 bg-primary-foreground text-primary font-bold hover:bg-primary-foreground/90 shadow-button text-base md:text-2xl py-6 md:py-7 h-auto rounded-xl"
               >
                 Подбор за 2 минуты
               </Button>
               <Button
                 size="lg"
-                onClick={() => scrollTo("#catalog")}
+                onClick={() => document.querySelector("#catalog")?.scrollIntoView({ behavior: "smooth" })}
                 className="w-full sm:flex-1 bg-primary-foreground/20 backdrop-blur-sm border-[3px] border-primary-foreground text-primary-foreground font-bold hover:bg-primary-foreground/35 text-base md:text-2xl py-6 md:py-7 h-auto rounded-xl"
               >
                 Перейти в каталог
