@@ -6,6 +6,7 @@ import HowWeWorkSection from "@/components/HowWeWorkSection";
 
 import CatalogSection from "@/components/CatalogSection";
 import ServicesSection from "@/components/ServicesSection";
+import PricingSection from "@/components/PricingSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import ArticlesSection from "@/components/ArticlesSection";
