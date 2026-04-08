@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ArticlePage from "./pages/ArticlePage.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import MontazhCeny from "./pages/MontazhCeny.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import Overview from "./pages/admin/Overview.tsx";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/montazh-ceny" element={<MontazhCeny />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />}>
             <Route index element={<Overview />} />
