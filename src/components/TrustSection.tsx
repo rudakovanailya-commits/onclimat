@@ -19,9 +19,9 @@ const cards = [
 ];
 
 const TrustSection = () => (
-  <section className="py-20">
+  <section className="py-14">
     <div className="container">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">
         Почему нам доверяют
       </h2>
       <div className="grid sm:grid-cols-3 gap-6">

@@ -8,12 +8,12 @@ const reviews = [
 ];
 
 const ReviewsSection = () => (
-  <section className="py-20">
+  <section className="py-14">
     <div className="container">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">
         Отзывы наших клиентов
       </h2>
-      <div className="grid md:grid-cols-3 gap-6 mb-10">
+      <div className="grid md:grid-cols-3 gap-6 mb-8">
         {reviews.map((r) => (
           <div key={r.name} className="bg-card rounded-xl p-6 shadow-card border border-border space-y-4">
             <div className="flex gap-0.5">

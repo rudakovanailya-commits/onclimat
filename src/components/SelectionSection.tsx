@@ -39,11 +39,11 @@ const SelectionSection = () => {
   };
 
   return (
-    <section id="selection" className="py-20">
+    <section id="selection" className="py-14">
       <div className="container max-w-2xl">
         <form
           onSubmit={handleSubmit}
-          className="bg-card rounded-2xl p-8 md:p-12 shadow-card border border-border space-y-6"
+          className="bg-card rounded-2xl p-6 md:p-10 shadow-card border border-border space-y-5"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center">
             Оставить заявку
