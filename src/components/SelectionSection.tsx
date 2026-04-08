@@ -39,7 +39,7 @@ const SelectionSection = () => {
   };
 
   return (
-    <section id="selection" className="py-14 bg-background">
+    <section id="selection" className="py-20 bg-background">
       <div className="container max-w-2xl">
         <form
           onSubmit={handleSubmit}

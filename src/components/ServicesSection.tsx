@@ -9,7 +9,7 @@ const services = [
 ];
 
 const ServicesSection = () => (
-  <section id="services" className="py-14 bg-background">
+  <section id="services" className="py-20 bg-background">
     <div className="container">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">Услуги</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
