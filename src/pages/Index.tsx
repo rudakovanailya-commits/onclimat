@@ -29,8 +29,6 @@ const Index = () => (
       <PortfolioSection />
       <ReviewsSection />
       <ArticlesSection />
-      <GeographySection />
-      <CtaSection />
       <Footer />
       <ChatWidget />
     </div>
