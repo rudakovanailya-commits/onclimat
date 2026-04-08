@@ -6,7 +6,7 @@ const steps = [
 ];
 
 const HowWeWorkSection = () => (
-  <section className="py-20 bg-muted/50">
+  <section className="py-20">
     <div className="container">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-14">
         Как мы работаем
