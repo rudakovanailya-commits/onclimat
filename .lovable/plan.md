@@ -1,16 +1,47 @@
 
+Цель
+- Убрать вечную "Загрузка..." в админ-разделах и сделать причину сбоя видимой.
 
-## Plan: Assign admin role to user
+Что я нашёл
+- На скриншоте показывается не загрузка страницы статей, а глобальный loader из `src/pages/AdminDashboard.tsx`.
+- Проверка роли admin проходит успешно: запросы к `user_roles` возвращают `200` и `admin`.
+- Значит проблема вероятнее всего в `src/hooks/useAuth.tsx`: там одновременно работают `getSession()` и `onAuthStateChange()`, оба делают запрос в `user_roles` и оба управляют `loading`.
+- Почти все админ-страницы грузят данные без нормальных `loading/error` состояний, поэтому пользователь видит зависание вместо понятной ошибки.
 
-### What
-Insert a row into `user_roles` table linking user `03d2ba60-7887-4c89-826c-47dedcdba31a` (r-nailya@mail.ru) to the `admin` role.
+План исправления
+1. Переписать `useAuth` на один надёжный поток
+- Вынести проверку admin-роли в отдельную функцию.
+- Убрать дублирование между `getSession()` и `onAuthStateChange()`.
+- Не держать тяжёлую async-логику прямо внутри `onAuthStateChange`; вызывать отдельный `resolveAuth`.
+- Во всех ветках завершать `loading` через `try/catch/finally`.
+- Добавить защиту от обновления state после unmount.
 
-### How
-Single SQL INSERT via the database insert tool:
-```sql
-INSERT INTO public.user_roles (user_id, role) VALUES ('03d2ba60-7887-4c89-826c-47dedcdba31a', 'admin');
-```
+2. Сделать `AdminDashboard` устойчивым
+- Показывать глобальный loader только во время первичной проверки сессии.
+- Если сессия невалидна или роль не подтверждена, сразу уводить на `/admin/login`, а не оставлять бесконечную загрузку.
 
-### After
-You can log in at `/admin/login` with email `r-nailya@mail.ru` and password `88888888`.
+3. Добавить локальные состояния загрузки и ошибок в разделы
+- Для `AdminArticles`, `AdminServices`, `AdminPortfolio`, `AdminCatalog`, `AdminContacts`, `AdminSubmissions`, `AdminSections`:
+  - `loading` при первом запросе
+  - `error` с понятным текстом
+  - `try/catch` в `load/save/remove`
+- Тогда каждый раздел либо покажет данные, либо объяснит, что именно не загрузилось.
 
+4. Отдельно улучшить `AdminCatalog`
+- Разделить состояния загрузки категорий и товаров.
+- Явно показывать: "Загружаем категории", "Нет категорий", "Нет товаров".
+- Исключить ситуацию, когда пустой `activeCat` выглядит как зависание.
+
+5. Проверка после внедрения
+- Войти в `/admin/login`.
+- Последовательно открыть: Обзор, Услуги, Каталог, Работы, Статьи, Акции, Контакты, Заявки, Секции.
+- Проверить, что ни один раздел не остаётся на вечной "Загрузка...".
+
+Технические детали
+- Основные файлы: `src/hooks/useAuth.tsx`, `src/pages/AdminDashboard.tsx`, `src/pages/admin/AdminArticles.tsx`, `AdminServices.tsx`, `AdminCatalog.tsx`, `AdminPortfolio.tsx`, `AdminContacts.tsx`, `AdminSubmissions.tsx`, `AdminSections.tsx`.
+- Изменения в базе не нужны.
+- Консольное предупреждение про ref у `AdminDashboard` выглядит вторичным и не похоже на основную причину зависания; сначала нужно стабилизировать auth/loading flow.
+
+Ожидаемый результат
+- Админка перестанет зависать на общем экране "Загрузка...".
+- Если какой-то запрос реально падает, ошибка будет видна в конкретном разделе, а не маскироваться бесконечным loader.
