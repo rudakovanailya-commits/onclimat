@@ -97,7 +97,7 @@ const SelectionSection = () => {
           <Button
             type="submit"
             size="lg"
-            className="w-full gradient-primary text-primary-foreground shadow-button"
+            className="w-full btn-gradient text-primary-foreground"
           >
             Оставить заявку
           </Button>

@@ -22,7 +22,7 @@ const ServicesSection = () => (
             <p className="text-sm text-muted-foreground mb-2">{s.text}</p>
             {s.extra && <p className="text-xs text-muted-foreground mb-2">{s.extra}</p>}
             <div className="mt-auto pt-4">
-              <Button className="gradient-primary text-primary-foreground shadow-button w-full">Оставить заявку</Button>
+              <Button className="btn-gradient text-primary-foreground w-full">Оставить заявку</Button>
             </div>
           </div>
         ))}
