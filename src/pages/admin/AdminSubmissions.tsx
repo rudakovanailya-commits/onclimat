@@ -11,31 +11,50 @@ type Submission = Tables<"submissions">;
 const AdminSubmissions = () => {
   const [items, setItems] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const load = async () => {
-    const { data } = await supabase
-      .from("submissions")
-      .select("*")
-      .order("created_at", { ascending: false });
-    setItems(data ?? []);
-    setLoading(false);
+    try {
+      setError("");
+      const { data, error: err } = await supabase
+        .from("submissions")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (err) throw err;
+      setItems(data ?? []);
+    } catch (e: any) {
+      setError(e.message || "Ошибка загрузки");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);
 
   const markRead = async (id: string) => {
-    await supabase.from("submissions").update({ is_read: true }).eq("id", id);
-    toast.success("Отмечено как прочитанное");
-    load();
+    try {
+      const { error: err } = await supabase.from("submissions").update({ is_read: true }).eq("id", id);
+      if (err) throw err;
+      toast.success("Отмечено как прочитанное");
+      load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка");
+    }
   };
 
   const remove = async (id: string) => {
-    await supabase.from("submissions").delete().eq("id", id);
-    toast.success("Заявка удалена");
-    load();
+    try {
+      const { error: err } = await supabase.from("submissions").delete().eq("id", id);
+      if (err) throw err;
+      toast.success("Заявка удалена");
+      load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка удаления");
+    }
   };
 
-  if (loading) return <p className="text-muted-foreground">Загрузка...</p>;
+  if (loading) return <p className="text-muted-foreground">Загрузка заявок...</p>;
+  if (error) return <p className="text-destructive">Ошибка: {error}</p>;
 
   return (
     <div className="space-y-4">

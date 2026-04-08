@@ -27,14 +27,17 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin)) {
-      navigate("/admin/login");
+      navigate("/admin/login", { replace: true });
     }
   }, [user, isAdmin, loading, navigate]);
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-muted/30">
-        <p className="text-muted-foreground">Загрузка...</p>
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          <p className="text-muted-foreground text-sm">Проверка доступа...</p>
+        </div>
       </div>
     );
   }
@@ -46,7 +49,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen flex bg-muted/30">
-      {/* Mobile overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/30 z-40 lg:hidden"
@@ -54,7 +56,6 @@ const AdminDashboard = () => {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-card border-r border-border flex flex-col transition-transform duration-200 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
@@ -101,7 +102,6 @@ const AdminDashboard = () => {
         </div>
       </aside>
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
         <header className="h-14 border-b border-border bg-card flex items-center px-4 gap-3">
           <button className="lg:hidden" onClick={() => setSidebarOpen(true)}>

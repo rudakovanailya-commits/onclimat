@@ -21,17 +21,36 @@ const AdminCatalog = () => {
   const [featuresStr, setFeaturesStr] = useState("");
   const [isNew, setIsNew] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [loadingCats, setLoadingCats] = useState(true);
+  const [loadingProducts, setLoadingProducts] = useState(false);
+  const [error, setError] = useState("");
 
   const loadCats = async () => {
-    const { data } = await supabase.from("catalog_categories").select("*").order("sort_order");
-    setCategories(data ?? []);
-    if (data?.length && !activeCat) setActiveCat(data[0].id);
+    try {
+      setError("");
+      const { data, error: err } = await supabase.from("catalog_categories").select("*").order("sort_order");
+      if (err) throw err;
+      setCategories(data ?? []);
+      if (data?.length && !activeCat) setActiveCat(data[0].id);
+    } catch (e: any) {
+      setError(e.message || "Ошибка загрузки категорий");
+    } finally {
+      setLoadingCats(false);
+    }
   };
 
   const loadProducts = async () => {
-    if (!activeCat) return;
-    const { data } = await supabase.from("catalog_products").select("*").eq("category_id", activeCat).order("sort_order");
-    setProducts(data ?? []);
+    if (!activeCat) { setProducts([]); return; }
+    try {
+      setLoadingProducts(true);
+      const { data, error: err } = await supabase.from("catalog_products").select("*").eq("category_id", activeCat).order("sort_order");
+      if (err) throw err;
+      setProducts(data ?? []);
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка загрузки товаров");
+    } finally {
+      setLoadingProducts(false);
+    }
   };
 
   useEffect(() => { loadCats(); }, []);
@@ -68,14 +87,36 @@ const AdminCatalog = () => {
 
   const save = async () => {
     if (!form.name.trim()) { toast.error("Введите название"); return; }
-    const features = featuresStr.split(",").map((s) => s.trim()).filter(Boolean);
-    const payload = { name: form.name, area: form.area, price: form.price, features: JSON.stringify(features), image_url: form.image_url || null, sort_order: form.sort_order, visible: form.visible, category_id: form.category_id };
-    if (isNew) { await supabase.from("catalog_products").insert(payload); toast.success("Товар добавлен"); }
-    else { await supabase.from("catalog_products").update(payload).eq("id", editing!); toast.success("Товар обновлён"); }
-    cancel(); loadProducts();
+    try {
+      const features = featuresStr.split(",").map((s) => s.trim()).filter(Boolean);
+      const payload = { name: form.name, area: form.area, price: form.price, features: JSON.stringify(features), image_url: form.image_url || null, sort_order: form.sort_order, visible: form.visible, category_id: form.category_id };
+      if (isNew) {
+        const { error: err } = await supabase.from("catalog_products").insert(payload);
+        if (err) throw err;
+        toast.success("Товар добавлен");
+      } else {
+        const { error: err } = await supabase.from("catalog_products").update(payload).eq("id", editing!);
+        if (err) throw err;
+        toast.success("Товар обновлён");
+      }
+      cancel(); loadProducts();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка сохранения");
+    }
   };
 
-  const remove = async (id: string) => { await supabase.from("catalog_products").delete().eq("id", id); toast.success("Удалено"); loadProducts(); };
+  const remove = async (id: string) => {
+    try {
+      const { error: err } = await supabase.from("catalog_products").delete().eq("id", id);
+      if (err) throw err;
+      toast.success("Удалено"); loadProducts();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка удаления");
+    }
+  };
+
+  if (loadingCats) return <p className="text-muted-foreground">Загрузка каталога...</p>;
+  if (error) return <p className="text-destructive">Ошибка: {error}</p>;
 
   const renderForm = () => (
     <div className="space-y-3">
@@ -114,48 +155,56 @@ const AdminCatalog = () => {
         <Button onClick={startNew} size="sm" className="gap-1" disabled={!activeCat}><Plus className="w-4 h-4" /> Добавить товар</Button>
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        {categories.map((c) => (
-          <button
-            key={c.id}
-            onClick={() => { setActiveCat(c.id); cancel(); }}
-            className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors cursor-pointer ${
-              activeCat === c.id ? "btn-gradient text-primary-foreground border-transparent" : "bg-card text-foreground border-border hover:bg-accent"
-            }`}
-          >
-            {c.label}
-          </button>
-        ))}
-      </div>
+      {categories.length === 0 ? (
+        <p className="text-muted-foreground text-sm">Нет категорий</p>
+      ) : (
+        <div className="flex flex-wrap gap-2">
+          {categories.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => { setActiveCat(c.id); cancel(); }}
+              className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors cursor-pointer ${
+                activeCat === c.id ? "btn-gradient text-primary-foreground border-transparent" : "bg-card text-foreground border-border hover:bg-accent"
+              }`}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       {editing === "new" && <div className="bg-card rounded-xl p-4 border border-primary/30">{renderForm()}</div>}
 
-      <div className="space-y-2">
-        {products.map((p) => (
-          <div key={p.id} className="bg-card rounded-xl p-4 border border-border">
-            {editing === p.id ? renderForm() : (
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3 min-w-0">
-                  {p.image_url && <img src={p.image_url} alt="" className="w-16 h-12 object-cover rounded shrink-0" />}
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-foreground">{p.name}</span>
-                      <span className="text-sm text-primary">{p.price}</span>
-                      {!p.visible && <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded">скрыт</span>}
+      {loadingProducts ? (
+        <p className="text-muted-foreground text-sm">Загрузка товаров...</p>
+      ) : (
+        <div className="space-y-2">
+          {products.map((p) => (
+            <div key={p.id} className="bg-card rounded-xl p-4 border border-border">
+              {editing === p.id ? renderForm() : (
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    {p.image_url && <img src={p.image_url} alt="" className="w-16 h-12 object-cover rounded shrink-0" />}
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-foreground">{p.name}</span>
+                        <span className="text-sm text-primary">{p.price}</span>
+                        {!p.visible && <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded">скрыт</span>}
+                      </div>
+                      <p className="text-sm text-muted-foreground truncate">{p.area}</p>
                     </div>
-                    <p className="text-sm text-muted-foreground truncate">{p.area}</p>
+                  </div>
+                  <div className="flex gap-1 shrink-0">
+                    <Button variant="ghost" size="icon" onClick={() => startEdit(p)}><Pencil className="w-4 h-4" /></Button>
+                    <Button variant="ghost" size="icon" onClick={() => remove(p.id)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
                   </div>
                 </div>
-                <div className="flex gap-1 shrink-0">
-                  <Button variant="ghost" size="icon" onClick={() => startEdit(p)}><Pencil className="w-4 h-4" /></Button>
-                  <Button variant="ghost" size="icon" onClick={() => remove(p.id)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-        {products.length === 0 && <p className="text-muted-foreground text-sm">Нет товаров в этой категории</p>}
-      </div>
+              )}
+            </div>
+          ))}
+          {products.length === 0 && !loadingProducts && <p className="text-muted-foreground text-sm">Нет товаров в этой категории</p>}
+        </div>
+      )}
     </div>
   );
 };

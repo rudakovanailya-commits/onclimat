@@ -10,12 +10,22 @@ type Contact = Tables<"contacts">;
 
 const AdminContacts = () => {
   const [items, setItems] = useState<Contact[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
   const [value, setValue] = useState("");
 
   const load = async () => {
-    const { data } = await supabase.from("contacts").select("*").order("sort_order");
-    setItems(data ?? []);
+    try {
+      setError("");
+      const { data, error: err } = await supabase.from("contacts").select("*").order("sort_order");
+      if (err) throw err;
+      setItems(data ?? []);
+    } catch (e: any) {
+      setError(e.message || "Ошибка загрузки");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);
@@ -24,12 +34,20 @@ const AdminContacts = () => {
   const cancel = () => setEditing(null);
 
   const save = async (id: string) => {
-    await supabase.from("contacts").update({ value }).eq("id", id);
-    toast.success("Контакт обновлён");
-    cancel(); load();
+    try {
+      const { error: err } = await supabase.from("contacts").update({ value }).eq("id", id);
+      if (err) throw err;
+      toast.success("Контакт обновлён");
+      cancel(); load();
+    } catch (e: any) {
+      toast.error(e.message || "Ошибка сохранения");
+    }
   };
 
   const keyLabel: Record<string, string> = { phone: "Телефон", email: "Email", address: "Адрес" };
+
+  if (loading) return <p className="text-muted-foreground">Загрузка контактов...</p>;
+  if (error) return <p className="text-destructive">Ошибка: {error}</p>;
 
   return (
     <div className="space-y-4">
@@ -55,6 +73,7 @@ const AdminContacts = () => {
             )}
           </div>
         ))}
+        {items.length === 0 && <p className="text-muted-foreground text-sm p-4">Контактов нет</p>}
       </div>
     </div>
   );
