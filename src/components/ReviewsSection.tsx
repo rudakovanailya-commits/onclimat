@@ -8,7 +8,7 @@ const reviews = [
 ];
 
 const ReviewsSection = () => (
-  <section className="py-20 bg-muted/50">
+  <section className="py-20">
     <div className="container">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
         Отзывы наших клиентов
