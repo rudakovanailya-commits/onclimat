@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { articles } from "@/data/articles";
 
 const ArticlesSection = () => (
-  <section id="articles" className="py-14 bg-background">
+  <section id="articles" className="py-20 bg-background">
     <div className="container">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
         Что важно знать перед установкой

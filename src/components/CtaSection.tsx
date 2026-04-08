@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 
 const CtaSection = () => (
-  <section className="py-14">
+  <section className="py-20">
     <div className="container">
       <div className="rounded-2xl gradient-primary p-10 md:p-16 text-center space-y-6">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground">
