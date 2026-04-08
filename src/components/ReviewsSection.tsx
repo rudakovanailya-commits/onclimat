@@ -18,7 +18,7 @@ const ReviewsSection = () => (
           <div key={r.name} className="bg-card rounded-xl p-6 shadow-card border border-border space-y-4">
             <div className="flex gap-0.5">
               {Array.from({ length: r.rating }).map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                <Star key={i} className="w-5 h-5 fill-violet text-violet" />
               ))}
             </div>
             <p className="text-foreground leading-relaxed">«{r.text}»</p>
