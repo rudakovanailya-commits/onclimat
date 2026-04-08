@@ -9,8 +9,6 @@ import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import ArticlesSection from "@/components/ArticlesSection";
-import GeographySection from "@/components/GeographySection";
-import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import SilkCSSBackground from "@/components/SilkCSSBackground";
 import { ChatProvider } from "@/components/ChatContext";
