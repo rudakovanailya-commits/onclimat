@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Check, AlertCircle, MessageCircle, Calculator, ArrowRight } from "lucide-react";
+import { Check, AlertCircle, MessageCircle, Calculator, ArrowRight, ShieldCheck, Award, Clock, Wrench } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { useChat } from "@/components/ChatContext";
 
@@ -11,8 +11,20 @@ const plans = [
   { label: "До 5,5 кВт", key: "5.5", base: 23490, note: "до 50 м²" },
 ];
 
-const included = ["Установка блоков", "Прокладка трассы", "Подключение", "Запуск и проверка"];
-const factors = ["Длина трассы", "Сложность монтажа", "Дополнительные работы"];
+const included = [
+  { icon: Calculator, text: "Подбор мощности" },
+  { icon: Wrench, text: "Размещение блоков" },
+  { icon: ArrowRight, text: "Дренаж" },
+  { icon: Check, text: "Подключение" },
+  { icon: ShieldCheck, text: "Тестовый запуск" },
+];
+
+const whyUs = [
+  { icon: Award, text: "Монтажники с допусками" },
+  { icon: ShieldCheck, text: "Проверенные материалы" },
+  { icon: Check, text: "Гарантия" },
+  { icon: Clock, text: "Установка в день обращения" },
+];
 
 const EXTRA_PER_METER = 1500;
 const COMPLEX_SURCHARGE = 3000;
@@ -163,18 +175,18 @@ const PricingSection = () => {
           </Link>
         </div>
 
-        {/* Info blocks */}
+        {/* Что входит в монтаж */}
         <div className="grid sm:grid-cols-2 gap-5">
           <div className="bg-card rounded-xl p-6 shadow-card border border-border">
             <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
               <Check className="w-5 h-5 text-accent-foreground" />
               Что входит в монтаж
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {included.map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent-foreground shrink-0" />
-                  {item}
+                <li key={item.text} className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <item.icon className="w-4 h-4 text-accent-foreground shrink-0" />
+                  {item.text}
                 </li>
               ))}
             </ul>
@@ -182,18 +194,36 @@ const PricingSection = () => {
 
           <div className="bg-card rounded-xl p-6 shadow-card border border-border">
             <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 text-accent-foreground" />
-              Что влияет на стоимость
+              <Award className="w-5 h-5 text-accent-foreground" />
+              Почему выбирают нас
             </h3>
-            <ul className="space-y-2">
-              {factors.map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent-foreground shrink-0" />
-                  {item}
+            <ul className="space-y-3">
+              {whyUs.map((item) => (
+                <li key={item.text} className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <item.icon className="w-4 h-4 text-accent-foreground shrink-0" />
+                  {item.text}
                 </li>
               ))}
             </ul>
           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="rounded-2xl gradient-primary p-8 md:p-10 text-center space-y-4 mt-10">
+          <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground">
+            Закажите монтаж кондиционера
+          </h3>
+          <p className="text-primary-foreground/80 text-base max-w-md mx-auto">
+            Поможем подобрать и рассчитаем стоимость
+          </p>
+          <Button
+            size="lg"
+            className="bg-primary-foreground text-primary font-semibold hover:bg-primary-foreground/90 shadow-button text-base px-10"
+            onClick={() => openChat("Хочу заказать монтаж кондиционера")}
+          >
+            <MessageCircle className="w-5 h-5" />
+            Оставить заявку
+          </Button>
         </div>
       </div>
     </section>
