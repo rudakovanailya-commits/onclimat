@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Phone, MapPin, Menu, X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChat } from "@/components/ChatContext";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -43,6 +44,7 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <MapPin className="w-3.5 h-3.5" />
             <span>СПб и ЛО</span>
@@ -93,6 +95,9 @@ const Header = () => {
           <a href="tel:+78001234567" className="flex items-center gap-2 py-2 text-sm font-semibold">
             <Phone className="w-4 h-4" /> 8 (800) 123-45-67
           </a>
+          <div className="flex items-center gap-2 mt-2">
+            <ThemeToggle />
+          </div>
           <div className="flex flex-col gap-2 mt-2">
             <Button
               onClick={() => { setMobileOpen(false); openChat("Помогите подобрать оборудование"); }}
