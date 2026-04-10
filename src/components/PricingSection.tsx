@@ -208,23 +208,6 @@ const PricingSection = () => {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="rounded-2xl gradient-primary p-8 md:p-10 text-center space-y-4 mt-10">
-          <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground">
-            Закажите монтаж кондиционера
-          </h3>
-          <p className="text-primary-foreground/80 text-base max-w-md mx-auto">
-            Поможем подобрать и рассчитаем стоимость
-          </p>
-          <Button
-            size="lg"
-            className="bg-primary-foreground text-primary font-semibold hover:bg-primary-foreground/90 shadow-button text-base px-10"
-            onClick={() => openChat("Хочу заказать монтаж кондиционера")}
-          >
-            <MessageCircle className="w-5 h-5" />
-            Оставить заявку
-          </Button>
-        </div>
       </div>
     </section>
   );
