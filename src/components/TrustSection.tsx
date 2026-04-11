@@ -1,4 +1,12 @@
 import { Settings, Truck, Handshake } from "lucide-react";
+import AnimatedCounter from "@/components/AnimatedCounter";
+
+const stats = [
+  { value: 1200, suffix: "+", label: "Установок выполнено" },
+  { value: 7, suffix: " лет", label: "Опыт работы" },
+  { value: 50, suffix: "+", label: "Брендов в каталоге" },
+  { value: 98, suffix: "%", label: "Довольных клиентов" },
+];
 
 const cards = [
   {
@@ -24,6 +32,21 @@ const TrustSection = () => (
       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">
         Почему нам доверяют
       </h2>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        {stats.map((s) => (
+          <div
+            key={s.label}
+            className="text-center bg-card rounded-xl p-5 border border-border shadow-card"
+          >
+            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">
+              <AnimatedCounter target={s.value} suffix={s.suffix} />
+            </div>
+            <p className="text-xs md:text-sm text-muted-foreground">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
       <div className="grid sm:grid-cols-3 gap-6">
         {cards.map((card) => (
           <div
