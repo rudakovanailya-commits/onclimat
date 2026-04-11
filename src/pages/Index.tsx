@@ -42,6 +42,9 @@ const Index = () => (
       <PortfolioSection />
     </ScrollReveal>
     <ScrollReveal delay={100}>
+      <BeforeAfterSection />
+    </ScrollReveal>
+    <ScrollReveal delay={100}>
       <ReviewsSection />
     </ScrollReveal>
     <ScrollReveal>
