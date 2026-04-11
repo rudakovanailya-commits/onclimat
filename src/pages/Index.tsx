@@ -7,6 +7,7 @@ import CatalogSection from "@/components/CatalogSection";
 import ServicesSection from "@/components/ServicesSection";
 import PricingSection from "@/components/PricingSection";
 import PortfolioSection from "@/components/PortfolioSection";
+import BeforeAfterSection from "@/components/BeforeAfterSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import ArticlesSection from "@/components/ArticlesSection";
 import Footer from "@/components/Footer";
