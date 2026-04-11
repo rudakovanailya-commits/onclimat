@@ -3,7 +3,6 @@ import HeroSection from "@/components/HeroSection";
 import PromosSection from "@/components/PromosSection";
 import TrustSection from "@/components/TrustSection";
 import HowWeWorkSection from "@/components/HowWeWorkSection";
-
 import CatalogSection from "@/components/CatalogSection";
 import ServicesSection from "@/components/ServicesSection";
 import PricingSection from "@/components/PricingSection";
@@ -13,22 +12,40 @@ import ArticlesSection from "@/components/ArticlesSection";
 import Footer from "@/components/Footer";
 import SilkCSSBackground from "@/components/SilkCSSBackground";
 import ChatWidget from "@/components/ChatWidget";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const Index = () => (
   <div className="min-h-screen">
     <SilkCSSBackground />
     <Header />
     <HeroSection />
-    <TrustSection />
-    <HowWeWorkSection />
-    
-    <PromosSection />
-    <CatalogSection />
-    <ServicesSection />
-    <PricingSection />
-    <PortfolioSection />
-    <ReviewsSection />
-    <ArticlesSection />
+    <ScrollReveal>
+      <TrustSection />
+    </ScrollReveal>
+    <ScrollReveal delay={100}>
+      <HowWeWorkSection />
+    </ScrollReveal>
+    <ScrollReveal>
+      <PromosSection />
+    </ScrollReveal>
+    <ScrollReveal delay={100}>
+      <CatalogSection />
+    </ScrollReveal>
+    <ScrollReveal>
+      <ServicesSection />
+    </ScrollReveal>
+    <ScrollReveal delay={100}>
+      <PricingSection />
+    </ScrollReveal>
+    <ScrollReveal>
+      <PortfolioSection />
+    </ScrollReveal>
+    <ScrollReveal delay={100}>
+      <ReviewsSection />
+    </ScrollReveal>
+    <ScrollReveal>
+      <ArticlesSection />
+    </ScrollReveal>
     <Footer />
     <ChatWidget />
   </div>
