@@ -4,20 +4,36 @@ import DecryptedText from "@/components/DecryptedText";
 import heroImage from "@/assets/hero-comfort.jpg";
 import { useChat } from "@/components/ChatContext";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const HeroSection = () => {
   const [typingDone, setTypingDone] = useState(false);
   const { openChat } = useChat();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        if (rect.bottom > 0) {
+          setScrollY(window.scrollY);
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <section id="hero" className="relative min-h-[70vh] flex items-center overflow-hidden">
+    <section ref={sectionRef} id="hero" className="relative min-h-[70vh] flex items-center overflow-hidden">
       <img
         src={heroImage}
         alt="Комфортная комната с кондиционером"
         width={1920}
         height={1080}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover will-change-transform"
+        style={{ transform: `translateY(${scrollY * 0.3}px)`, minHeight: "120%" }}
       />
       <div className="absolute inset-0 gradient-hero" />
       <div className="container relative z-10 py-14 md:py-24">
