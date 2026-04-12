@@ -14,12 +14,14 @@ import Footer from "@/components/Footer";
 import SilkCSSBackground from "@/components/SilkCSSBackground";
 import ChatWidget from "@/components/ChatWidget";
 import ScrollReveal from "@/components/ScrollReveal";
+import SocialProofNotifications from "@/components/SocialProofNotifications";
 
 const Index = () => (
   <div className="min-h-screen">
     <SilkCSSBackground />
     <Header />
     <HeroSection />
+    <SocialProofNotifications />
     <ScrollReveal>
       <TrustSection />
     </ScrollReveal>
