@@ -32,8 +32,8 @@ const HeroSection = () => {
         alt="Комфортная комната с кондиционером"
         width={1920}
         height={1080}
-        className="absolute inset-0 w-full min-h-[115%] object-cover object-center will-change-transform"
-        style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+        className="absolute inset-x-0 bottom-0 h-[123%] w-full object-cover object-[50%_82%] will-change-transform"
+        style={{ transform: `translateY(${scrollY * 0.12}px)` }}
       />
       <div className="absolute inset-0 gradient-hero" />
       <div className="container relative z-10 py-14 md:py-24">
