@@ -1,13 +1,12 @@
 import { Phone, MapPin, Mail } from "lucide-react";
+import logo from "@/assets/logo-onklimat.png";
 
 const Footer = () => (
   <footer id="contacts" className="bg-foreground text-primary-foreground py-14">
     <div className="container">
       <div className="grid md:grid-cols-3 gap-10">
         <div className="space-y-4">
-          <div className="text-xl font-bold">
-            <span className="text-primary">On</span> Климат
-          </div>
+          <img src={logo} alt="On Климат" className="h-9 w-auto brightness-0 invert" loading="lazy" />
           <p className="text-sm text-primary-foreground/60">
             Подбор и установка климатического оборудования с 2005 года
           </p>
