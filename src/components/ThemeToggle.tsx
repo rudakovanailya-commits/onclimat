@@ -5,19 +5,22 @@ import { Button } from "@/components/ui/button";
 const ThemeToggle = () => {
   const [dark, setDark] = useState(() => {
     if (typeof window === "undefined") return true;
-    const saved = localStorage.getItem("theme");
-    if (saved) return saved === "dark";
+
+    const saved = window.localStorage.getItem("theme");
+
+    if (saved === "light") return false;
+
+    if (saved !== "dark") {
+      window.localStorage.setItem("theme", "dark");
+    }
+
     return true;
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    if (dark) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    localStorage.setItem("theme", dark ? "dark" : "light");
+    root.classList.toggle("dark", dark);
+    window.localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
 
   return (
