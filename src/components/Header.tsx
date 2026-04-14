@@ -3,7 +3,7 @@ import { Phone, MapPin, Menu, X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChat } from "@/components/ChatContext";
 import ThemeToggle from "@/components/ThemeToggle";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-onklimat.png";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
