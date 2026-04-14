@@ -27,12 +27,17 @@
 
   <body>
     <script>
-      // Apply saved theme instantly to prevent flash; default to dark
       (function(){
-        var t = localStorage.getItem('theme');
-        if (t === 'light') {
-          document.documentElement.classList.remove('dark');
-        } else {
+        try {
+          var t = localStorage.getItem('theme');
+          var isDark = t !== 'light';
+
+          document.documentElement.classList.toggle('dark', isDark);
+
+          if (!t) {
+            localStorage.setItem('theme', 'dark');
+          }
+        } catch (e) {
           document.documentElement.classList.add('dark');
         }
       })();
