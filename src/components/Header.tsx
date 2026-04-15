@@ -28,7 +28,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
       <div className="container flex items-center justify-between h-16 md:h-18">
         <a href="#hero" className="flex items-center shrink-0">
-          <img src={logo} alt="Фирменный знак On Климат" className="h-10 md:h-12 w-auto object-contain dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] dark:bg-white/10 dark:rounded-md dark:px-2 dark:py-1" />
+          <img src={logo} alt="Фирменный знак On Климат" className="h-10 md:h-12 w-auto object-contain dark:brightness-[2] dark:saturate-[1.3]" />
         </a>
 
         <nav className="hidden lg:flex items-center gap-6">
