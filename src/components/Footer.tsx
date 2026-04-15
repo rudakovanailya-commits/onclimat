@@ -7,7 +7,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-3 gap-10">
         <div className="space-y-4">
           <img src={logo} alt="Фирменный знак On Климат" className="h-12 md:h-14 w-auto object-contain brightness-0 invert" loading="lazy" />
-          <p className="text-sm text-primary-foreground/60">
+          <p className="text-sm text-white/60">
             Подбор и установка климатического оборудования с 2005 года
           </p>
         </div>
