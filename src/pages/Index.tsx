@@ -10,6 +10,7 @@ import PortfolioSection from "@/components/PortfolioSection";
 import BeforeAfterSection from "@/components/BeforeAfterSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import ArticlesSection from "@/components/ArticlesSection";
+import GeographySection from "@/components/GeographySection";
 import Footer from "@/components/Footer";
 import SilkCSSBackground from "@/components/SilkCSSBackground";
 import ChatWidget from "@/components/ChatWidget";
@@ -51,6 +52,9 @@ const Index = () => (
     </ScrollReveal>
     <ScrollReveal>
       <ArticlesSection />
+    </ScrollReveal>
+    <ScrollReveal delay={100}>
+      <GeographySection />
     </ScrollReveal>
     <Footer />
     <ChatWidget />
