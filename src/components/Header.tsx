@@ -28,7 +28,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
       <div className="container flex items-center justify-between h-16 md:h-18">
         <a href="#hero" className="flex items-center shrink-0">
-          <img src={logo} alt="Фирменный знак On Климат" className="h-10 md:h-12 w-auto object-contain" />
+          <img src={logo} alt="Фирменный знак On Климат" className="h-10 md:h-12 w-auto object-contain dark:brightness-[1.8] dark:contrast-[1.1]" />
         </a>
 
         <nav className="hidden lg:flex items-center gap-6">
