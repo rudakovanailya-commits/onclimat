@@ -153,11 +153,11 @@ const GeographySection = () => {
             {/* Legend */}
             <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
-                <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "hsl(var(--primary) / 0.25)" }} />
+                <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "hsl(var(--primary) / 0.4)" }} />
                 Санкт-Петербург
               </span>
               <span className="flex items-center gap-2">
-                <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "hsl(var(--primary) / 0.12)" }} />
+                <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "hsl(var(--primary) / 0.2)" }} />
                 Ленинградская область
               </span>
             </div>
