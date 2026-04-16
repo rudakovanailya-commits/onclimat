@@ -115,8 +115,8 @@ const GeographySection = () => {
                   key={d.id}
                   d={d.d}
                   className="transition-all duration-300 cursor-pointer"
-                  fill={hovered === d.id ? "hsl(var(--primary) / 0.35)" : "hsl(var(--primary) / 0.12)"}
-                  stroke={hovered === d.id ? "hsl(var(--primary))" : "hsl(var(--border))"}
+                  fill={hovered === d.id ? "hsl(var(--primary) / 0.45)" : "hsl(var(--primary) / 0.2)"}
+                  stroke={hovered === d.id ? "hsl(var(--primary))" : "hsl(var(--primary) / 0.4)"}
                   strokeWidth={hovered === d.id ? 2 : 1}
                   filter={hovered === d.id ? "url(#glow)" : undefined}
                   onMouseMove={(e) => handleMouse(d, e)}
@@ -130,9 +130,9 @@ const GeographySection = () => {
                   key={d.id}
                   d={d.d}
                   className="transition-all duration-300 cursor-pointer"
-                  fill={hovered === d.id ? "hsl(var(--primary) / 0.55)" : "hsl(var(--primary) / 0.25)"}
-                  stroke={hovered === d.id ? "hsl(var(--primary))" : "hsl(var(--primary) / 0.5)"}
-                  strokeWidth={hovered === d.id ? 2.5 : 1.2}
+                  fill={hovered === d.id ? "hsl(var(--primary) / 0.65)" : "hsl(var(--primary) / 0.4)"}
+                  stroke={hovered === d.id ? "hsl(var(--primary))" : "hsl(var(--primary) / 0.7)"}
+                  strokeWidth={hovered === d.id ? 2.5 : 1.5}
                   filter={hovered === d.id ? "url(#glow)" : undefined}
                   onMouseMove={(e) => handleMouse(d, e)}
                   onMouseLeave={() => { setHovered(null); setTooltip(null); }}
@@ -153,11 +153,11 @@ const GeographySection = () => {
             {/* Legend */}
             <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
-                <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "hsl(var(--primary) / 0.25)" }} />
+                <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "hsl(var(--primary) / 0.4)" }} />
                 Санкт-Петербург
               </span>
               <span className="flex items-center gap-2">
-                <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "hsl(var(--primary) / 0.12)" }} />
+                <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "hsl(var(--primary) / 0.2)" }} />
                 Ленинградская область
               </span>
             </div>
