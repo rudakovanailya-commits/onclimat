@@ -1,5 +1,17 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
+
+const MAX_NOTIFICATIONS_PER_SESSION = 2;
+const FIRST_DELAY_MS = 30_000; // 30s after page load
+const INTERVAL_MIN_MS = 120_000; // 2 min
+const INTERVAL_MAX_MS = 180_000; // 3 min
+const NIGHT_START_HOUR = 23; // 23:00
+const NIGHT_END_HOUR = 7; // 07:00
+
+function isNightTime(): boolean {
+  const hour = new Date().getHours();
+  return hour >= NIGHT_START_HOUR || hour < NIGHT_END_HOUR;
+}
 
 const names = [
   "Иван", "Алексей", "Мария", "Дмитрий", "Елена", "Сергей",
