@@ -1,5 +1,17 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
+
+const MAX_NOTIFICATIONS_PER_SESSION = 2;
+const FIRST_DELAY_MS = 30_000; // 30s after page load
+const INTERVAL_MIN_MS = 120_000; // 2 min
+const INTERVAL_MAX_MS = 180_000; // 3 min
+const NIGHT_START_HOUR = 23; // 23:00
+const NIGHT_END_HOUR = 7; // 07:00
+
+function isNightTime(): boolean {
+  const hour = new Date().getHours();
+  return hour >= NIGHT_START_HOUR || hour < NIGHT_END_HOUR;
+}
 
 const names = [
   "Иван", "Алексей", "Мария", "Дмитрий", "Елена", "Сергей",
@@ -23,7 +35,12 @@ function random<T>(arr: T[]): T {
 }
 
 function randomMinutes(): number {
-  return Math.floor(Math.random() * 25) + 1;
+  // 3-25 минут — правдоподобный диапазон
+  return Math.floor(Math.random() * 23) + 3;
+}
+
+function randomInterval(): number {
+  return INTERVAL_MIN_MS + Math.random() * (INTERVAL_MAX_MS - INTERVAL_MIN_MS);
 }
 
 function generateNotification() {
@@ -38,26 +55,36 @@ function generateNotification() {
 
 const SocialProofNotifications = () => {
   const [notification, setNotification] = useState<ReturnType<typeof generateNotification> | null>(null);
+  const shownCountRef = useRef(0);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const showNext = useCallback(() => {
+  const showOnce = useCallback(() => {
+    if (shownCountRef.current >= MAX_NOTIFICATIONS_PER_SESSION) return;
+    if (isNightTime()) return;
+
     setNotification(generateNotification());
-    setTimeout(() => setNotification(null), 4000);
+    shownCountRef.current += 1;
+
+    const hideTimer = setTimeout(() => setNotification(null), 4000);
+    timersRef.current.push(hideTimer);
+
+    if (shownCountRef.current < MAX_NOTIFICATIONS_PER_SESSION) {
+      const nextTimer = setTimeout(showOnce, randomInterval());
+      timersRef.current.push(nextTimer);
+    }
   }, []);
 
   useEffect(() => {
-    const initialDelay = setTimeout(() => {
-      showNext();
-    }, 8000);
+    if (isNightTime()) return;
 
-    const interval = setInterval(() => {
-      showNext();
-    }, 15000 + Math.random() * 10000);
+    const firstTimer = setTimeout(showOnce, FIRST_DELAY_MS);
+    timersRef.current.push(firstTimer);
 
     return () => {
-      clearTimeout(initialDelay);
-      clearInterval(interval);
+      timersRef.current.forEach(clearTimeout);
+      timersRef.current = [];
     };
-  }, [showNext]);
+  }, [showOnce]);
 
   return (
     <div className="fixed bottom-4 left-4 z-50 max-w-xs pointer-events-none">
