@@ -57,6 +57,12 @@ serve(async (req) => {
           model: "google/gemini-3-flash-preview",
           messages: [
             { role: "system", content: SYSTEM_PROMPT },
+            { role: "system", content: (() => {
+              const now = new Date();
+              const mskMinutes = ((now.getUTCHours() + 3) % 24) * 60 + now.getUTCMinutes();
+              const isWorking = mskMinutes >= 570 && mskMinutes < 1200;
+              return `Текущее время в Москве: ${String(Math.floor(mskMinutes / 60)).padStart(2, "0")}:${String(mskMinutes % 60).padStart(2, "0")}. Сейчас ${isWorking ? "РАБОЧЕЕ" : "НЕРАБОЧЕЕ"} время. Рабочие часы: ежедневно 9:30–20:00 МСК.`;
+            })() },
             ...messages,
           ],
           stream: true,
