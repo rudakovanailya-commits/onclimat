@@ -10,6 +10,7 @@ import ArticlePage from "./pages/ArticlePage.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import MontazhCeny from "./pages/MontazhCeny.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
+import ResetPassword from "./pages/ResetPassword.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import Overview from "./pages/admin/Overview.tsx";
 import AdminServices from "./pages/admin/AdminServices.tsx";
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/montazh-ceny" element={<MontazhCeny />} />
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/reset-password" element={<ResetPassword />} />
             <Route path="/admin" element={<AdminDashboard />}>
               <Route index element={<Overview />} />
               <Route path="services" element={<AdminServices />} />
