@@ -11,6 +11,23 @@ const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const handleResetPassword = async () => {
+    if (!email.trim()) {
+      toast.error("Введите email для сброса пароля");
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/admin/reset-password`,
+    });
+    setLoading(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Письмо со ссылкой для сброса отправлено на email");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) {
@@ -84,6 +101,15 @@ const AdminLogin = () => {
         >
           {loading ? "Вход..." : "Войти"}
         </Button>
+
+        <button
+          type="button"
+          onClick={handleResetPassword}
+          disabled={loading}
+          className="w-full text-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Забыли пароль?
+        </button>
 
         <p className="text-center">
           <a href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
